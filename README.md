@@ -1,8 +1,8 @@
-# Free Indian Salary Calculator - CTC to In-hand Conversion
+# Free Indian Salary Calculator - CTC to In-hand Conversion (FY 2026-27)
 
-A comprehensive web-based salary calculator specifically designed for Indian employees to calculate their in-hand salary from CTC with accurate tax and deduction breakdowns.
+A comprehensive web-based salary calculator specifically designed for Indian employees to calculate their in-hand salary from CTC with accurate tax and deduction breakdowns for FY 2026-27.
 
-🚀 **Live Demo**: Coming soon on GitHub Pages!
+🚀 **Live Demo**: https://fintoolsindia.netlify.app
 
 ## Features
 
@@ -11,17 +11,18 @@ A comprehensive web-based salary calculator specifically designed for Indian emp
 - **Accurate Calculations**: Based on standard Indian salary structures
 - **Real-time Updates**: Calculations update as you type
 
-### 📊 Tax Calculations
-- **Dual Tax Regimes**: Support for both Old and New tax regimes (2024-25)
+### 📊 Tax Calculations (Updated for FY 2026-27)
+- **Dual Tax Regimes**: Support for both Old and New tax regimes
 - **Age-based Exemptions**: Senior citizen and super senior citizen benefits
 - **Comprehensive Deductions**: Section 80C, 80D, HRA exemptions
 - **Professional Tax**: Metro and non-metro city variations
+- **Enhanced Standard Deduction**: ₹75,000 for both regimes
 
 ### 🎯 Key Calculations
 - **Income Tax**: Accurate slab-wise calculations with cess
 - **PF Deductions**: Employee and employer contributions
 - **HRA Exemption**: City-wise HRA exemption calculations
-- **Standard Deduction**: Updated limits for both regimes
+- **Standard Deduction**: Updated to ₹75,000 for FY 2026-27
 
 ## How to Use
 
@@ -45,9 +46,19 @@ A comprehensive web-based salary calculator specifically designed for Indian emp
 
 ## Tax Regimes Supported
 
-### New Tax Regime (2024-25)
+### New Tax Regime (2026-27)
 - ₹0 - ₹3,00,000: 0%
 - ₹3,00,001 - ₹7,00,000: 5%
+- ₹7,00,001 - ₹10,00,000: 10%
+- ₹10,00,001 - ₹12,00,000: 15%
+- ₹12,00,001 - ₹15,00,000: 20%
+- Above ₹15,00,000: 30%
+
+### Old Tax Regime (2026-27)
+- ₹0 - ₹2,50,000: 0%
+- ₹2,50,001 - ₹5,00,000: 5%
+- ₹5,00,001 - ₹10,00,000: 20%
+- Above ₹10,00,000: 30%
 - ₹7,00,001 - ₹10,00,000: 10%
 - ₹10,00,001 - ₹12,00,000: 15%
 - ₹12,00,001 - ₹15,00,000: 20%

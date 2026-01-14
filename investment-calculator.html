@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Returns Calculator - FinTools India</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Calculate SIP, lump sum investments, and compound interest returns with our free Investment Returns Calculator for 2026. Plan your financial future with accurate projections.">
+    <meta name="keywords" content="investment calculator, SIP calculator, compound interest, mutual funds, India">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1 class="brand-title">💰 FinTools India</h1>
+                <p class="brand-subtitle">Your Financial Planning Partner</p>
+                
+                <!-- Tool Navigation -->
+                <div class="tool-navigation">
+                    <a href="index.html" class="nav-link">
+                        💼 Salary Calculator
+                    </a>
+                    <a href="emi-calculator.html" class="nav-link">
+                        🏠 EMI Calculator
+                    </a>
+                    <a href="investment-calculator.html" class="nav-link active">
+                        📈 Investment Calculator
+                    </a>
+                    <div class="nav-link coming-soon">
+                        💳 Tax Planner <span class="coming-soon-badge">Soon</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- AdSense Top Banner -->
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-1384260575279260"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+
+        <main>
+            <div class="calculator-card">
+                <h2>🚀 Investment Returns Calculator</h2>
+                <p class="description">
+                    Calculate the future value of your SIP investments, lump sum investments, and see the power of compound interest.
+                </p>
+
+                <div class="input-section">
+                    <div class="investment-tabs">
+                        <button class="tab-btn active" onclick="switchTab('sip')">SIP Investment</button>
+                        <button class="tab-btn" onclick="switchTab('lumpsum')">Lump Sum</button>
+                    </div>
+
+                    <!-- SIP Calculator -->
+                    <div id="sip-tab" class="tab-content active">
+                        <div class="form-group">
+                            <label>Monthly SIP Amount (₹)</label>
+                            <input type="number" id="sipAmount" value="5000" min="500" step="100">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Investment Period (Years)</label>
+                            <input type="number" id="sipPeriod" value="10" min="1" max="50" step="1">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Expected Annual Return (%)</label>
+                            <input type="number" id="sipReturn" value="12" min="1" max="30" step="0.5">
+                            <small>Historical market average: 10-15% for equity mutual funds</small>
+                        </div>
+
+                        <button class="calculate-btn" onclick="calculateSIP()">Calculate SIP Returns</button>
+                    </div>
+
+                    <!-- Lump Sum Calculator -->
+                    <div id="lumpsum-tab" class="tab-content">
+                        <div class="form-group">
+                            <label>Investment Amount (₹)</label>
+                            <input type="number" id="lumpAmount" value="100000" min="1000" step="1000">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Investment Period (Years)</label>
+                            <input type="number" id="lumpPeriod" value="10" min="1" max="50" step="1">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Expected Annual Return (%)</label>
+                            <input type="number" id="lumpReturn" value="12" min="1" max="30" step="0.5">
+                        </div>
+
+                        <button class="calculate-btn" onclick="calculateLumpSum()">Calculate Returns</button>
+                    </div>
+                </div>
+
+                <div id="investmentResults" class="results-section" style="display:none;">
+                    <h3>Investment Results</h3>
+                    <div class="result-grid">
+                        <div class="result-item highlight">
+                            <span class="result-label">Total Investment</span>
+                            <span class="result-value" id="totalInvestment">₹0</span>
+                        </div>
+                        <div class="result-item highlight">
+                            <span class="result-label">Maturity Value</span>
+                            <span class="result-value" id="maturityValue">₹0</span>
+                        </div>
+                        <div class="result-item success">
+                            <span class="result-label">Total Returns</span>
+                            <span class="result-value" id="totalReturns">₹0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Return on Investment</span>
+                            <span class="result-value" id="returnPercent">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Investment Tips -->
+            <div class="tips-section">
+                <h3>💡 Investment Tips</h3>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <h4>Start Early</h4>
+                        <p>The power of compounding works best over longer periods. Start investing as early as possible.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>SIP Benefits</h4>
+                        <p>Systematic Investment Plans help average out market volatility through rupee cost averaging.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>Diversification</h4>
+                        <p>Don't put all eggs in one basket. Diversify across asset classes and sectors.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>Stay Invested</h4>
+                        <p>Market volatility is normal. Stay invested for long-term wealth creation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Affiliate Section -->
+            <div class="affiliate-section">
+                <h3>🔥 Start Investing Today</h3>
+                <p>Ready to begin your investment journey? Check out these top-rated platforms:</p>
+                <div class="affiliate-grid">
+                    <div class="affiliate-card">
+                        <h4>Zerodha Coin</h4>
+                        <p>Zero commission mutual fund investing</p>
+                        <a href="https://zerodha.com/open-account?c=ZCONNECT" target="_blank" class="affiliate-btn" rel="nofollow">Start Investing</a>
+                    </div>
+                    <div class="affiliate-card">
+                        <h4>Groww</h4>
+                        <p>Simple & easy mutual fund investments</p>
+                        <a href="https://groww.in/" target="_blank" class="affiliate-btn" rel="nofollow">Explore Groww</a>
+                    </div>
+                    <div class="affiliate-card">
+                        <h4>SBI Mutual Fund</h4>
+                        <p>Trusted fund house with diverse schemes</p>
+                        <a href="https://www.sbimf.com/" target="_blank" class="affiliate-btn" rel="nofollow">View Plans</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AdSense Middle Banner -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-1384260575279260"
+                     data-ad-slot="9876543210"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 FinTools India. All rights reserved. | 
+               <a href="privacy.html">Privacy Policy</a> | 
+               <a href="terms.html">Terms of Service</a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        let currentTab = 'sip';
+
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`[onclick="switchTab('${tab}')"]`).classList.add('active');
+            
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(`${tab}-tab`).classList.add('active');
+            
+            // Hide results
+            document.getElementById('investmentResults').style.display = 'none';
+        }
+
+        function calculateSIP() {
+            const monthlyAmount = parseFloat(document.getElementById('sipAmount').value);
+            const years = parseFloat(document.getElementById('sipPeriod').value);
+            const annualReturn = parseFloat(document.getElementById('sipReturn').value);
+            
+            if (!monthlyAmount || !years || !annualReturn) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            const monthlyReturn = annualReturn / 100 / 12;
+            const months = years * 12;
+            
+            // SIP formula: M = P × [{(1 + i)^n - 1} / i] × (1 + i)
+            const maturityAmount = monthlyAmount * (((Math.pow(1 + monthlyReturn, months) - 1) / monthlyReturn) * (1 + monthlyReturn));
+            const totalInvestment = monthlyAmount * months;
+            const totalReturns = maturityAmount - totalInvestment;
+            const returnPercent = ((totalReturns / totalInvestment) * 100).toFixed(1);
+
+            displayResults(totalInvestment, maturityAmount, totalReturns, returnPercent);
+        }
+
+        function calculateLumpSum() {
+            const principal = parseFloat(document.getElementById('lumpAmount').value);
+            const years = parseFloat(document.getElementById('lumpPeriod').value);
+            const annualReturn = parseFloat(document.getElementById('lumpReturn').value);
+            
+            if (!principal || !years || !annualReturn) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            // Compound interest formula: A = P(1 + r)^t
+            const maturityAmount = principal * Math.pow(1 + (annualReturn / 100), years);
+            const totalReturns = maturityAmount - principal;
+            const returnPercent = ((totalReturns / principal) * 100).toFixed(1);
+
+            displayResults(principal, maturityAmount, totalReturns, returnPercent);
+        }
+
+        function displayResults(investment, maturity, returns, returnPercent) {
+            document.getElementById('totalInvestment').textContent = '₹' + investment.toLocaleString('en-IN');
+            document.getElementById('maturityValue').textContent = '₹' + Math.round(maturity).toLocaleString('en-IN');
+            document.getElementById('totalReturns').textContent = '₹' + Math.round(returns).toLocaleString('en-IN');
+            document.getElementById('returnPercent').textContent = returnPercent + '%';
+            
+            document.getElementById('investmentResults').style.display = 'block';
+            document.getElementById('investmentResults').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initialize with SIP calculation
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateSIP();
+        });
+    </script>
+
+    <!-- AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1384260575279260"
+            crossorigin="anonymous"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>

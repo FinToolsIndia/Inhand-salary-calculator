@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMI Calculator - FinToolsIndia</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1384260575279260"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1 class="brand-title">💰 FinTools India</h1>
+                <p class="brand-subtitle">Your Financial Planning Partner</p>
+                
+                <!-- Tool Navigation -->
+                <div class="tool-navigation">
+                    <a href="index.html" class="nav-link">
+                        💼 Salary Calculator
+                    </a>
+                    <a href="emi-calculator.html" class="nav-link active">
+                        🏠 EMI Calculator
+                    </a>
+                    <a href="investment-calculator.html" class="nav-link">
+                        📈 Investment Calculator
+                    </a>
+                    <a href="tax-planner.html" class="nav-link">
+                        💳 Tax Planner
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div class="calculator-section">
+            <div class="input-panel">
+                <h2><i class="fas fa-calculator"></i> Loan Details</h2>
+                
+                <div class="form-group">
+                    <label for="loanAmount">Loan Amount (₹)</label>
+                    <input type="number" id="loanAmount" placeholder="Enter loan amount" min="1000">
+                </div>
+
+                <div class="form-group">
+                    <label for="interestRate">Annual Interest Rate (%)</label>
+                    <input type="number" id="interestRate" placeholder="Enter interest rate" min="1" max="50" step="0.01">
+                </div>
+
+                <div class="form-group">
+                    <label for="loanTenure">Loan Tenure (Years)</label>
+                    <input type="number" id="loanTenure" placeholder="Enter tenure in years" min="1" max="30">
+                </div>
+
+                <div class="form-group">
+                    <label for="loanType">Loan Type</label>
+                    <select id="loanType">
+                        <option value="home">Home Loan</option>
+                        <option value="car">Car Loan</option>
+                        <option value="personal">Personal Loan</option>
+                    </select>
+                </div>
+
+                <button onclick="calculateEMI()" class="calculate-btn">
+                    <i class="fas fa-calculator"></i> Calculate EMI
+                </button>
+            </div>
+
+            <div class="results-panel">
+                <h2><i class="fas fa-chart-bar"></i> EMI Breakdown</h2>
+                
+                <div class="result-card highlight">
+                    <h3>Monthly EMI</h3>
+                    <div class="breakdown-item total monthly">
+                        <span>EMI Amount:</span>
+                        <span id="emiAmount">₹0</span>
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <h3>Loan Summary</h3>
+                    <div class="breakdown-item">
+                        <span>Principal Amount:</span>
+                        <span id="principalAmount">₹0</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Total Interest:</span>
+                        <span id="totalInterest">₹0</span>
+                    </div>
+                    <div class="breakdown-item total">
+                        <span>Total Amount:</span>
+                        <span id="totalAmount">₹0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="index.html" style="color: #667eea; text-decoration: none; font-weight: 500;">
+                ← Back to Salary Calculator
+            </a>
+        </div>
+
+        <footer>
+            <p>
+                <i class="fas fa-info-circle"></i>
+                This calculator provides approximate values. Please consult a financial advisor for accurate planning.
+            </p>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a> |
+                <a href="terms.html">Terms of Service</a>
+            </div>
+            <div class="footer-brand">
+                <strong>FinToolsIndia</strong> - Professional Financial Calculators for India
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function calculateEMI() {
+            const loanAmount = parseFloat(document.getElementById('loanAmount').value);
+            const annualRate = parseFloat(document.getElementById('interestRate').value);
+            const tenure = parseFloat(document.getElementById('loanTenure').value);
+
+            if (!loanAmount || !annualRate || !tenure) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            const monthlyRate = annualRate / 12 / 100;
+            const months = tenure * 12;
+
+            const emi = (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, months)) / 
+                       (Math.pow(1 + monthlyRate, months) - 1);
+
+            const totalAmount = emi * months;
+            const totalInterest = totalAmount - loanAmount;
+
+            document.getElementById('emiAmount').textContent = formatCurrency(emi);
+            document.getElementById('principalAmount').textContent = formatCurrency(loanAmount);
+            document.getElementById('totalInterest').textContent = formatCurrency(totalInterest);
+            document.getElementById('totalAmount').textContent = formatCurrency(totalAmount);
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-IN', {
+                style: 'currency',
+                currency: 'INR',
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://fintoolsindia.netlify.app/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Allow all financial calculators
+Allow: /index.html
+Allow: /emi-calculator.html
+Allow: /investment-calculator.html
+Allow: /tax-planner.html
+Allow: /landing.html
+Allow: /contact.html
+Allow: /privacy.html
+Allow: /terms.html
+
+# CSS and JS files
+Allow: /style.css
+Allow: /script.js

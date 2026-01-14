@@ -6,7 +6,7 @@
     <title>InHand Calc - Free Indian Salary Calculator | CTC to In-hand Converter</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Free Indian salary calculator to convert CTC to in-hand salary. Calculate income tax, PF, HRA exemptions for both old and new tax regimes.">
+    <meta name="description" content="Free Indian salary calculator for FY 2026-27 to convert CTC to in-hand salary. Calculate income tax, PF, HRA exemptions for both old and new tax regimes.">
     <meta name="keywords" content="salary calculator india, ctc to inhand calculator, tax calculator india, income tax calculator, pf calculator, hra calculator">
     <meta name="author" content="InHand Calc - Professional Salary Tools">
     
@@ -14,7 +14,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://fintoolsindia.netlify.app/">
     <meta property="og:title" content="InHand Calc - Free Indian Salary Calculator by FinToolsIndia">
-    <meta property="og:description" content="Calculate your exact in-hand salary from CTC with accurate tax deductions. Supports both old and new tax regimes.">
+    <meta property="og:description" content="Calculate your exact in-hand salary from CTC with accurate tax deductions for FY 2026-27. Supports both old and new tax regimes.">
     <meta property="og:image" content="https://fintoolsindia.netlify.app/preview.png">
 
     <!-- Twitter -->
@@ -24,6 +24,7 @@
     <meta property="twitter:description" content="Calculate your exact in-hand salary from CTC with accurate tax deductions. Supports both old and new tax regimes.">
     <meta property="twitter:image" content="https://fintoolsindia.netlify.app/preview.png">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="gdpr.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
@@ -44,8 +45,24 @@
     <div class="container">
         <header>
             <h1><i class="fas fa-calculator"></i> InHand Calc</h1>
-            <p>Professional Indian Salary Calculator - Calculate your in-hand salary from CTC with accurate tax and deduction breakdowns</p>
+            <p>Professional Indian Salary Calculator - Calculate your in-hand salary from CTC with accurate tax and deduction breakdowns for FY 2026-27</p>
             <div class="brand-subtitle">Trusted by thousands of professionals across India</div>
+            
+            <!-- Navigation Menu -->
+            <nav class="tool-navigation">
+                <a href="index.html" class="nav-link active">
+                    <i class="fas fa-money-bill-wave"></i> Salary Calculator
+                </a>
+                <a href="emi-calculator.html" class="nav-link">
+                    <i class="fas fa-home"></i> EMI Calculator
+                </a>
+                <a href="investment-calculator.html" class="nav-link">
+                    <i class="fas fa-chart-line"></i> Investment Calculator
+                </a>
+                <a href="tax-planner.html" class="nav-link">
+                    <i class="fas fa-calculator"></i> Tax Planner
+                </a>
+            </nav>
         </header>
 
         <!-- AdSense Ad - Header Banner -->
@@ -122,18 +139,53 @@
                         <i class="fas fa-coffee"></i> Buy me a coffee
                     </a>
                 </div>
+
+                <!-- Email Newsletter Signup -->
+                <div class="newsletter-section">
+                    <h3>📧 Get Salary Tips & Updates</h3>
+                    <p>Join 1000+ professionals getting weekly salary insights!</p>
+                    <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                        <div class="newsletter-input-group">
+                            <input type="email" id="newsletter-email" placeholder="Enter your email" required>
+                            <button type="submit" class="newsletter-btn">
+                                <i class="fas fa-paper-plane"></i> Subscribe
+                            </button>
+                        </div>
+                        <p class="newsletter-disclaimer">Free salary guides, tax tips, and career advice. Unsubscribe anytime.</p>
+                    </form>
+                </div>
                 
                 <div class="affiliate-section">
-                    <h3>💳 Recommended Financial Products</h3>
+                    <h3>� Maximize Your Salary Value</h3>
+                    <p class="affiliate-intro">Based on your salary calculation, here are personalized financial recommendations:</p>
                     <div class="affiliate-links">
-                        <a href="#" class="affiliate-link" target="_blank">
-                            <i class="fas fa-credit-card"></i> Best Credit Cards for Professionals
+                        <a href="https://www.policybazaar.com" class="affiliate-link" target="_blank" rel="nofollow">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <strong>Health Insurance</strong>
+                                <span>Save up to 80% on premiums</span>
+                            </div>
                         </a>
-                        <a href="#" class="affiliate-link" target="_blank">
-                            <i class="fas fa-chart-line"></i> Start Your Investment Journey
+                        <a href="https://zerodha.com" class="affiliate-link" target="_blank" rel="nofollow">
+                            <i class="fas fa-chart-line"></i>
+                            <div>
+                                <strong>Start Investing</strong>
+                                <span>Build wealth with smart investments</span>
+                            </div>
                         </a>
-                        <a href="#" class="affiliate-link" target="_blank">
-                            <i class="fas fa-shield-alt"></i> Health Insurance Comparison
+                        <a href="https://www.bankbazaar.com" class="affiliate-link" target="_blank" rel="nofollow">
+                            <i class="fas fa-credit-card"></i>
+                            <div>
+                                <strong>Best Credit Cards</strong>
+                                <span>Earn rewards on every purchase</span>
+                            </div>
+                        </a>
+                        <a href="https://www.paisabazaar.com" class="affiliate-link" target="_blank" rel="nofollow">
+                            <i class="fas fa-home"></i>
+                            <div>
+                                <strong>Home Loans</strong>
+                                <span>Lowest interest rates available</span>
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -206,6 +258,27 @@
                     </div>
                 </div>
 
+                <!-- Premium Features Banner -->
+                <div class="premium-teaser">
+                    <div class="premium-content">
+                        <h3>🔥 Unlock Premium Features</h3>
+                        <ul class="premium-features">
+                            <li>✅ Multi-year salary projections</li>
+                            <li>✅ Investment recommendations</li>
+                            <li>✅ Tax optimization strategies</li>
+                            <li>✅ Detailed PDF reports</li>
+                            <li>✅ Comparison with industry standards</li>
+                        </ul>
+                        <div class="premium-pricing">
+                            <span class="price">₹299/month</span>
+                            <span class="offer">First month ₹99!</span>
+                        </div>
+                        <button class="premium-btn" onclick="showPremiumModal()">
+                            <i class="fas fa-crown"></i> Get Premium Access
+                        </button>
+                    </div>
+                </div>
+
                 <div class="result-card">
                     <h3>Tax Calculation Details</h3>
                     <div id="taxBreakdown"></div>
@@ -237,11 +310,13 @@
                 <a href="terms.html">Terms of Service</a>
             </div>
             <div class="footer-brand">
-                <strong>FinToolsIndia</strong> - Professional Financial Calculators for India
+                <strong>FinToolsIndia</strong> - Professional Financial Calculators for India<br>
+                <small>&copy; 2026 FinTools India. All rights reserved.</small>
             </div>
         </footer>
     </div>
 
     <script src="script.js"></script>
+    <script src="gdpr.js"></script>
 </body>
 </html>

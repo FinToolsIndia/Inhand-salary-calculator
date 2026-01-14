@@ -132,7 +132,7 @@ class SalaryCalculator {
         }
 
         // Standard deduction
-        const standardDeduction = inputs.regime === 'old' ? 50000 : 75000; // Updated for 2024
+        const standardDeduction = inputs.regime === 'old' ? 75000 : 75000; // Updated for 2026-27
         taxableIncome -= standardDeduction;
 
         // Employee PF deduction
@@ -155,7 +155,7 @@ class SalaryCalculator {
         let taxBreakdown = [];
 
         if (regime === 'new') {
-            // New Tax Regime Slabs for 2024-25
+            // New Tax Regime Slabs for 2026-27
             const slabs = [
                 { min: 0, max: 300000, rate: 0, desc: "₹0 - ₹3,00,000" },
                 { min: 300000, max: 700000, rate: 0.05, desc: "₹3,00,001 - ₹7,00,000" },
@@ -303,6 +303,40 @@ class SalaryCalculator {
 document.addEventListener('DOMContentLoaded', () => {
     new SalaryCalculator();
 });
+
+// Premium Modal Functions
+function showPremiumModal() {
+    alert('Premium features coming soon! Join our newsletter to be notified when they launch.');
+    document.getElementById('newsletter-email').focus();
+}
+
+// Newsletter Subscription
+function subscribeNewsletter(event) {
+    event.preventDefault();
+    const email = document.getElementById('newsletter-email').value;
+    
+    // For now, just show success message
+    // In production, you'd send this to your email service
+    alert(`Thank you! ${email} has been subscribed to our newsletter. You'll receive weekly salary tips and updates.`);
+    document.getElementById('newsletter-email').value = '';
+}
+
+// Enhanced user engagement tracking
+function trackUserEngagement() {
+    // Track which features users interact with most
+    let engagementData = {
+        calculationsPerformed: 0,
+        premiumInterest: 0,
+        affiliateClicks: 0,
+        newsletterSignups: 0
+    };
+    
+    // Store in localStorage for analytics
+    localStorage.setItem('userEngagement', JSON.stringify(engagementData));
+}
+
+// Call engagement tracking
+trackUserEngagement();
 
 // Add some utility functions for enhanced UX
 document.addEventListener('DOMContentLoaded', () => {

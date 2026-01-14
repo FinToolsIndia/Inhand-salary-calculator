@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - FinTools India</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Contact FinTools India for support, feedback, or suggestions. We're here to help with your financial planning needs.">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1 class="brand-title">💰 FinTools India</h1>
+                <p class="brand-subtitle">Your Financial Planning Partner</p>
+                
+                <!-- Tool Navigation -->
+                <div class="tool-navigation">
+                    <a href="index.html" class="nav-link">
+                        💼 Salary Calculator
+                    </a>
+                    <a href="emi-calculator.html" class="nav-link">
+                        🏠 EMI Calculator
+                    </a>
+                    <a href="investment-calculator.html" class="nav-link">
+                        📈 Investment Calculator
+                    </a>
+                    <a href="tax-planner.html" class="nav-link">
+                        💳 Tax Planner
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="calculator-card">
+                <h2>📞 Contact Us</h2>
+                <p class="description">
+                    Have questions, feedback, or suggestions? We'd love to hear from you!
+                </p>
+
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>Get in Touch</h3>
+                        <div class="contact-item">
+                            <strong>📧 Email:</strong>
+                            <p>support@fintoolsindia.com</p>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <strong>🕒 Response Time:</strong>
+                            <p>Within 24 hours</p>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <strong>🌐 Website:</strong>
+                            <p><a href="https://fintoolsindia.netlify.app">fintoolsindia.netlify.app</a></p>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <strong>📱 Social Media:</strong>
+                            <p>Follow us for financial tips and updates</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-section">
+                        <h3>Send Message</h3>
+                        <form class="contact-form" onsubmit="sendMessage(event)">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <select id="subject" name="subject" required>
+                                    <option value="">Select a topic</option>
+                                    <option value="bug">Bug Report</option>
+                                    <option value="feature">Feature Request</option>
+                                    <option value="feedback">General Feedback</option>
+                                    <option value="support">Technical Support</option>
+                                    <option value="business">Business Inquiry</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="5" required placeholder="Please describe your query in detail..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="calculate-btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <h3>❓ Frequently Asked Questions</h3>
+                
+                <div class="faq-item">
+                    <h4>Are the calculators accurate?</h4>
+                    <p>Yes, all our calculators are built using official government tax rates and formulas. However, please consult a tax professional for complex situations.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h4>Do you store my financial data?</h4>
+                    <p>No, all calculations happen in your browser. We don't store or transmit any of your personal financial information.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h4>Are the tools really free?</h4>
+                    <p>Yes, all basic tools are completely free. We may introduce premium features in the future, but core calculations will always remain free.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h4>How often are tax rates updated?</h4>
+                    <p>We update our tax calculators within 48 hours of any official announcement by the government.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h4>Can I suggest new features?</h4>
+                    <p>Absolutely! We welcome feature requests. Use the contact form above or email us directly with your suggestions.</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 FinTools India. All rights reserved. | 
+               <a href="privacy.html">Privacy Policy</a> | 
+               <a href="terms.html">Terms of Service</a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        function sendMessage(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const subject = formData.get('subject');
+            const message = formData.get('message');
+            
+            // Create mailto link (for now)
+            const mailtoLink = `mailto:support@fintoolsindia.com?subject=${encodeURIComponent(`[${subject}] Contact from ${name}`)}&body=${encodeURIComponent(`From: ${name} (${email})\n\nMessage:\n${message}`)}`;
+            
+            window.location.href = mailtoLink;
+            
+            // Show confirmation
+            alert('Thank you for your message! Your email client should open now. If not, please email us directly at support@fintoolsindia.com');
+            
+            // Reset form
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>

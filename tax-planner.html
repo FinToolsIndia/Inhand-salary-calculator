@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Planner & 80C Calculator FY 2026-27 - FinTools India</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Plan your taxes for FY 2026-27 and maximize savings with our comprehensive Tax Planner. Calculate 80C deductions, tax liability, and optimize your financial planning.">
+    <meta name="keywords" content="tax planner, 80C calculator, tax saving, income tax, India, tax deductions">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1 class="brand-title">💰 FinTools India</h1>
+                <p class="brand-subtitle">Your Financial Planning Partner</p>
+                
+                <!-- Tool Navigation -->
+                <div class="tool-navigation">
+                    <a href="index.html" class="nav-link">
+                        💼 Salary Calculator
+                    </a>
+                    <a href="emi-calculator.html" class="nav-link">
+                        🏠 EMI Calculator
+                    </a>
+                    <a href="investment-calculator.html" class="nav-link">
+                        📈 Investment Calculator
+                    </a>
+                    <a href="tax-planner.html" class="nav-link active">
+                        💳 Tax Planner
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- AdSense Top Banner -->
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-1384260575279260"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+
+        <main>
+            <div class="calculator-card">
+                <h2>📊 Tax Planner & 80C Calculator (FY 2026-27)</h2>
+                <p class="description">
+                    Plan your taxes for FY 2026-27, calculate potential savings, and optimize your investments under Section 80C.
+                </p>
+
+                <div class="input-section">
+                    <div class="form-group">
+                        <label>Annual Gross Income (₹)</label>
+                        <input type="number" id="grossIncome" value="800000" min="0" step="10000">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tax Regime</label>
+                        <select id="taxRegime" onchange="toggleDeductions()">
+                            <option value="old">Old Tax Regime (with deductions)</option>
+                            <option value="new">New Tax Regime (lower rates)</option>
+                        </select>
+                    </div>
+
+                    <div id="deductionsSection">
+                        <h3>Tax Deductions & Investments</h3>
+                        
+                        <div class="deduction-group">
+                            <h4>Section 80C Investments (Max: ₹1,50,000)</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>EPF Contribution (₹)</label>
+                                    <input type="number" id="epf" value="50000" min="0" max="150000" step="1000">
+                                </div>
+                                <div class="form-group">
+                                    <label>PPF Contribution (₹)</label>
+                                    <input type="number" id="ppf" value="50000" min="0" max="150000" step="1000">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>ELSS Mutual Funds (₹)</label>
+                                    <input type="number" id="elss" value="50000" min="0" max="150000" step="1000">
+                                </div>
+                                <div class="form-group">
+                                    <label>Life Insurance Premium (₹)</label>
+                                    <input type="number" id="insurance" value="25000" min="0" max="150000" step="1000">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>NSC/Tax Saver FD (₹)</label>
+                                    <input type="number" id="nsc" value="0" min="0" max="150000" step="1000">
+                                </div>
+                                <div class="form-group">
+                                    <label>Home Loan Principal (₹)</label>
+                                    <input type="number" id="homeLoan" value="0" min="0" max="150000" step="1000">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="deduction-group">
+                            <h4>Other Deductions</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Section 80D (Health Insurance) (₹)</label>
+                                    <input type="number" id="healthInsurance" value="25000" min="0" max="75000" step="1000">
+                                    <small>Max: ₹25,000 (Self), ₹50,000 (Parents above 60)</small>
+                                </div>
+                                <div class="form-group">
+                                    <label>HRA Exemption (₹)</label>
+                                    <input type="number" id="hra" value="100000" min="0" step="10000">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Standard Deduction (₹)</label>
+                                    <input type="number" id="standardDeduction" value="75000" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>NPS (80CCD 1B) (₹)</label>
+                                    <input type="number" id="nps" value="0" min="0" max="50000" step="1000">
+                                    <small>Max: ₹50,000 additional</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="calculate-btn" onclick="calculateTax()">Calculate Tax & Savings</button>
+                </div>
+
+                <div id="taxResults" class="results-section" style="display:none;">
+                    <h3>Tax Calculation Results</h3>
+                    <div class="result-grid">
+                        <div class="result-item">
+                            <span class="result-label">Gross Income</span>
+                            <span class="result-value" id="totalGrossIncome">₹0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Total Deductions</span>
+                            <span class="result-value" id="totalDeductions">₹0</span>
+                        </div>
+                        <div class="result-item highlight">
+                            <span class="result-label">Taxable Income</span>
+                            <span class="result-value" id="taxableIncome">₹0</span>
+                        </div>
+                        <div class="result-item warning">
+                            <span class="result-label">Income Tax</span>
+                            <span class="result-value" id="incomeTax">₹0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Health & Education Cess</span>
+                            <span class="result-value" id="cess">₹0</span>
+                        </div>
+                        <div class="result-item warning">
+                            <span class="result-label">Total Tax Liability</span>
+                            <span class="result-value" id="totalTax">₹0</span>
+                        </div>
+                        <div class="result-item success">
+                            <span class="result-label">Tax Saved (vs no deductions)</span>
+                            <span class="result-value" id="taxSaved">₹0</span>
+                        </div>
+                        <div class="result-item success">
+                            <span class="result-label">In-hand Income</span>
+                            <span class="result-value" id="inHandIncome">₹0</span>
+                        </div>
+                    </div>
+
+                    <div class="tax-breakdown">
+                        <h4>Tax Slab Breakdown</h4>
+                        <div id="slabBreakdown"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tax Planning Tips -->
+            <div class="tips-section">
+                <h3>💡 Tax Planning Strategies</h3>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <h4>Maximize 80C</h4>
+                        <p>Invest full ₹1.5L in PPF, ELSS, or EPF to save up to ₹46,800 in taxes (30% bracket).</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>Health Insurance</h4>
+                        <p>₹25K health insurance premium can save ₹7,800 in taxes while protecting your family.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>ELSS Benefits</h4>
+                        <p>Equity Linked Savings Schemes offer tax savings + potential 12-15% returns with 3-year lock-in.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>New vs Old Regime</h4>
+                        <p>Compare both regimes. Higher earners often benefit from old regime with deductions.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Investment Recommendations -->
+            <div class="affiliate-section">
+                <h3>🎯 Recommended Tax-Saving Investments</h3>
+                <div class="affiliate-grid">
+                    <div class="affiliate-card">
+                        <h4>ELSS Mutual Funds</h4>
+                        <p>Tax savings + wealth creation in 3 years</p>
+                        <a href="https://zerodha.com/open-account?c=ZCONNECT" target="_blank" class="affiliate-btn" rel="nofollow">Invest in ELSS</a>
+                    </div>
+                    <div class="affiliate-card">
+                        <h4>Health Insurance</h4>
+                        <p>Save taxes while protecting your health</p>
+                        <a href="https://www.policybazaar.com/" target="_blank" class="affiliate-btn" rel="nofollow">Compare Plans</a>
+                    </div>
+                    <div class="affiliate-card">
+                        <h4>PPF Account</h4>
+                        <p>15-year lock-in with tax-free returns</p>
+                        <a href="https://www.bankbazaar.com/fixed-deposit.html" target="_blank" class="affiliate-btn" rel="nofollow">Open PPF</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AdSense Middle Banner -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-1384260575279260"
+                     data-ad-slot="9876543210"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 FinTools India. All rights reserved. | 
+               <a href="privacy.html">Privacy Policy</a> | 
+               <a href="terms.html">Terms of Service</a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleDeductions() {
+            const regime = document.getElementById('taxRegime').value;
+            const deductionsSection = document.getElementById('deductionsSection');
+            
+            if (regime === 'new') {
+                deductionsSection.style.display = 'none';
+            } else {
+                deductionsSection.style.display = 'block';
+            }
+        }
+
+        function calculateTax() {
+            const grossIncome = parseFloat(document.getElementById('grossIncome').value);
+            const regime = document.getElementById('taxRegime').value;
+            
+            if (!grossIncome) {
+                alert('Please enter your gross income');
+                return;
+            }
+
+            let totalDeductions = 0;
+            let taxableIncome = grossIncome;
+            
+            if (regime === 'old') {
+                // Calculate total deductions
+                const epf = parseFloat(document.getElementById('epf').value) || 0;
+                const ppf = parseFloat(document.getElementById('ppf').value) || 0;
+                const elss = parseFloat(document.getElementById('elss').value) || 0;
+                const insurance = parseFloat(document.getElementById('insurance').value) || 0;
+                const nsc = parseFloat(document.getElementById('nsc').value) || 0;
+                const homeLoan = parseFloat(document.getElementById('homeLoan').value) || 0;
+                
+                const section80C = Math.min(epf + ppf + elss + insurance + nsc + homeLoan, 150000);
+                
+                const healthInsurance = Math.min(parseFloat(document.getElementById('healthInsurance').value) || 0, 75000);
+                const hra = parseFloat(document.getElementById('hra').value) || 0;
+                const standardDeduction = parseFloat(document.getElementById('standardDeduction').value) || 75000;
+                const nps = Math.min(parseFloat(document.getElementById('nps').value) || 0, 50000);
+                
+                totalDeductions = section80C + healthInsurance + hra + standardDeduction + nps;
+                taxableIncome = Math.max(grossIncome - totalDeductions, 0);
+            }
+            
+            // Calculate tax based on regime
+            const taxData = calculateIncomeTax(taxableIncome, regime);
+            const incomeTax = taxData.totalTax;
+            const cess = Math.round(incomeTax * 0.04); // 4% Health & Education Cess
+            const totalTax = incomeTax + cess;
+            
+            // Calculate tax without deductions for comparison
+            const taxWithoutDeductions = regime === 'old' ? 
+                calculateIncomeTax(grossIncome, regime).totalTax + Math.round(calculateIncomeTax(grossIncome, regime).totalTax * 0.04) : 
+                totalTax;
+            
+            const taxSaved = taxWithoutDeductions - totalTax;
+            const inHandIncome = grossIncome - totalTax;
+            
+            // Display results
+            document.getElementById('totalGrossIncome').textContent = '₹' + grossIncome.toLocaleString('en-IN');
+            document.getElementById('totalDeductions').textContent = '₹' + Math.round(totalDeductions).toLocaleString('en-IN');
+            document.getElementById('taxableIncome').textContent = '₹' + Math.round(taxableIncome).toLocaleString('en-IN');
+            document.getElementById('incomeTax').textContent = '₹' + incomeTax.toLocaleString('en-IN');
+            document.getElementById('cess').textContent = '₹' + cess.toLocaleString('en-IN');
+            document.getElementById('totalTax').textContent = '₹' + totalTax.toLocaleString('en-IN');
+            document.getElementById('taxSaved').textContent = '₹' + Math.max(0, taxSaved).toLocaleString('en-IN');
+            document.getElementById('inHandIncome').textContent = '₹' + Math.round(inHandIncome).toLocaleString('en-IN');
+            
+            // Show tax slab breakdown
+            displayTaxSlabBreakdown(taxableIncome, regime, taxData.breakdown);
+            
+            document.getElementById('taxResults').style.display = 'block';
+            document.getElementById('taxResults').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function calculateIncomeTax(income, regime) {
+            let tax = 0;
+            let breakdown = [];
+            
+            if (regime === 'new') {
+                // New Tax Regime (FY 2026-27)
+                const slabs = [
+                    { min: 0, max: 300000, rate: 0 },
+                    { min: 300000, max: 700000, rate: 5 },
+                    { min: 700000, max: 1000000, rate: 10 },
+                    { min: 1000000, max: 1200000, rate: 15 },
+                    { min: 1200000, max: 1500000, rate: 20 },
+                    { min: 1500000, max: Infinity, rate: 30 }
+                ];
+                
+                for (let slab of slabs) {
+                    if (income > slab.min) {
+                        const taxableInThisSlab = Math.min(income, slab.max) - slab.min;
+                        const taxInThisSlab = taxableInThisSlab * slab.rate / 100;
+                        tax += taxInThisSlab;
+                        
+                        if (taxableInThisSlab > 0) {
+                            breakdown.push({
+                                range: slab.max === Infinity ? `₹${slab.min.toLocaleString('en-IN')}+` : `₹${slab.min.toLocaleString('en-IN')} - ₹${slab.max.toLocaleString('en-IN')}`,
+                                rate: slab.rate + '%',
+                                amount: '₹' + Math.round(taxInThisSlab).toLocaleString('en-IN')
+                            });
+                        }
+                    }
+                }
+            } else {
+                // Old Tax Regime (FY 2026-27)
+                const slabs = [
+                    { min: 0, max: 250000, rate: 0 },
+                    { min: 250000, max: 500000, rate: 5 },
+                    { min: 500000, max: 1000000, rate: 20 },
+                    { min: 1000000, max: Infinity, rate: 30 }
+                ];
+                
+                for (let slab of slabs) {
+                    if (income > slab.min) {
+                        const taxableInThisSlab = Math.min(income, slab.max) - slab.min;
+                        const taxInThisSlab = taxableInThisSlab * slab.rate / 100;
+                        tax += taxInThisSlab;
+                        
+                        if (taxableInThisSlab > 0) {
+                            breakdown.push({
+                                range: slab.max === Infinity ? `₹${slab.min.toLocaleString('en-IN')}+` : `₹${slab.min.toLocaleString('en-IN')} - ₹${slab.max.toLocaleString('en-IN')}`,
+                                rate: slab.rate + '%',
+                                amount: '₹' + Math.round(taxInThisSlab).toLocaleString('en-IN')
+                            });
+                        }
+                    }
+                }
+            }
+            
+            return { totalTax: Math.round(tax), breakdown: breakdown };
+        }
+
+        function displayTaxSlabBreakdown(income, regime, breakdown) {
+            const container = document.getElementById('slabBreakdown');
+            let html = `<p><strong>${regime === 'new' ? 'New' : 'Old'} Tax Regime Slabs:</strong></p>`;
+            
+            if (breakdown.length === 0) {
+                html += '<p>No tax liability - income is below taxable limit.</p>';
+            } else {
+                html += '<div class="slab-breakdown-table">';
+                for (let slab of breakdown) {
+                    html += `
+                        <div class="slab-row">
+                            <span class="slab-range">${slab.range}</span>
+                            <span class="slab-rate">${slab.rate}</span>
+                            <span class="slab-amount">${slab.amount}</span>
+                        </div>
+                    `;
+                }
+                html += '</div>';
+            }
+            
+            container.innerHTML = html;
+        }
+
+        // Initialize with default calculation
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateTax();
+        });
+    </script>
+
+    <!-- AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1384260575279260"
+            crossorigin="anonymous"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>
