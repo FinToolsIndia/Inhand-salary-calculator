@@ -269,6 +269,37 @@ footer i {
     opacity: 0.8;
 }
 
+.footer-links {
+    margin: 10px 0;
+    font-size: 0.85rem;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* AdSense Styling */
+.ad-container {
+    margin: 20px 0;
+    text-align: center;
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.ad-container ins {
+    display: block;
+    text-align: center;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .calculator-section {
