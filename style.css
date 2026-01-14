@@ -34,6 +34,14 @@ header p {
     font-size: 1.1rem;
     font-weight: 300;
     opacity: 0.9;
+    margin-bottom: 5px;
+}
+
+.brand-subtitle {
+    font-size: 0.9rem;
+    font-weight: 400;
+    opacity: 0.8;
+    font-style: italic;
 }
 
 .calculator-section {
@@ -218,6 +226,12 @@ footer {
 
 footer i {
     margin-right: 5px;
+}
+
+.footer-brand {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    opacity: 0.8;
 }
 
 /* Responsive Design */
