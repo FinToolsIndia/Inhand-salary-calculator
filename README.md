@@ -1,6 +1,8 @@
-# Indian Salary Calculator
+# Free Indian Salary Calculator - CTC to In-hand Conversion
 
 A comprehensive web-based salary calculator specifically designed for Indian employees to calculate their in-hand salary from CTC with accurate tax and deduction breakdowns.
+
+🚀 **Live Demo**: Coming soon on GitHub Pages!
 
 ## Features
 
@@ -100,4 +102,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-**Made with ❤️ for Indian employees to simplify salary calculations**
+**Made with ❤️ for Indian employees to simplify salary calculations and generate passive income!**
