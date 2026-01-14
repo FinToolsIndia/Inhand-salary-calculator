@@ -178,6 +178,49 @@ header p {
     color: white;
 }
 
+/* Affiliate Section */
+.affiliate-section {
+    margin-top: 20px;
+    padding: 20px;
+    background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+    border-radius: 10px;
+    border: 1px solid #c3e6c3;
+}
+
+.affiliate-section h3 {
+    margin: 0 0 15px 0;
+    color: #2d5a2d;
+    font-size: 1rem;
+}
+
+.affiliate-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.affiliate-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    padding: 12px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #2d5a2d;
+    border: 1px solid #e0e0e0;
+    transition: all 0.2s ease;
+    font-size: 0.85rem;
+}
+
+.affiliate-link:hover {
+    background: #f8fff8;
+    border-color: #48bb78;
+    text-decoration: none;
+    color: #2d5a2d;
+    transform: translateX(5px);
+}
+
 .result-card {
     background: #f7fafc;
     border-radius: 10px;
