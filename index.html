@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Salary Calculator - CTC to In-hand Calculator</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Free Indian salary calculator to convert CTC to in-hand salary. Calculate income tax, PF, HRA exemptions for both old and new tax regimes.">
+    <meta name="keywords" content="salary calculator india, ctc to inhand calculator, tax calculator india, income tax calculator, pf calculator, hra calculator">
+    <meta name="author" content="Indian Salary Calculator">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/">
+    <meta property="og:title" content="Indian Salary Calculator - Free CTC to In-hand Calculator">
+    <meta property="og:description" content="Calculate your exact in-hand salary from CTC with accurate tax deductions. Supports both old and new tax regimes.">
+    <meta property="og:image" content="https://yourdomain.com/preview.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yourdomain.com/">
+    <meta property="twitter:title" content="Indian Salary Calculator - Free CTC to In-hand Calculator">
+    <meta property="twitter:description" content="Calculate your exact in-hand salary from CTC with accurate tax deductions. Supports both old and new tax regimes.">
+    <meta property="twitter:image" content="https://yourdomain.com/preview.png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-calculator"></i> Indian Salary Calculator</h1>
+            <p>Calculate your in-hand salary from CTC with accurate tax and deduction breakdowns</p>
+        </header>
+
+        <div class="calculator-section">
+            <div class="input-panel">
+                <h2><i class="fas fa-money-bill-wave"></i> Input Details</h2>
+                
+                <div class="form-group">
+                    <label for="ctc">Annual CTC (₹)</label>
+                    <input type="number" id="ctc" placeholder="Enter your annual CTC" min="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" placeholder="Enter your age" min="18" max="100" value="30">
+                </div>
+
+                <div class="form-group">
+                    <label for="city">City Type</label>
+                    <select id="city">
+                        <option value="metro">Metro (Mumbai, Delhi, Kolkata, Chennai)</option>
+                        <option value="non-metro">Non-Metro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="pfOption">PF Contribution</label>
+                    <select id="pfOption">
+                        <option value="yes">Yes (12% of Basic)</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="regime">Tax Regime</label>
+                    <select id="regime">
+                        <option value="old">Old Regime (with deductions)</option>
+                        <option value="new">New Regime (without deductions)</option>
+                    </select>
+                </div>
+
+                <div class="form-group old-regime-section">
+                    <h3>Deductions (Old Regime)</h3>
+                    
+                    <label for="section80c">Section 80C (₹)</label>
+                    <input type="number" id="section80c" placeholder="Max ₹1,50,000" max="150000" value="0">
+                    
+                    <label for="section80d">Section 80D - Health Insurance (₹)</label>
+                    <input type="number" id="section80d" placeholder="Max varies by age" value="0">
+                    
+                    <label for="hra">HRA Exemption (₹)</label>
+                    <input type="number" id="hra" placeholder="Annual HRA exemption" value="0">
+                </div>
+
+                <button id="calculateBtn" class="calculate-btn">
+                    <i class="fas fa-calculator"></i> Calculate Salary
+                </button>
+            </div>
+
+            <div class="results-panel">
+                <h2><i class="fas fa-chart-pie"></i> Salary Breakdown</h2>
+                
+                <div class="result-card">
+                    <h3>CTC Breakdown</h3>
+                    <div class="breakdown-item">
+                        <span>Basic Salary:</span>
+                        <span id="basicSalary">₹0</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>HRA:</span>
+                        <span id="hraAmount">₹0</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Special Allowance:</span>
+                        <span id="specialAllowance">₹0</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Employer PF:</span>
+                        <span id="employerPf">₹0</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Gratuity:</span>
+                        <span id="gratuity">₹0</span>
+                    </div>
+                    <div class="breakdown-item total">
+                        <span>Total CTC:</span>
+                        <span id="totalCtc">₹0</span>
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <h3>Deductions</h3>
+                    <div class="breakdown-item">
+                        <span>Employee PF:</span>
+                        <span id="employeePf">₹0</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Professional Tax:</span>
+                        <span id="professionalTax">₹0</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Income Tax:</span>
+                        <span id="incomeTax">₹0</span>
+                    </div>
+                    <div class="breakdown-item total">
+                        <span>Total Deductions:</span>
+                        <span id="totalDeductions">₹0</span>
+                    </div>
+                </div>
+
+                <div class="result-card highlight">
+                    <h3>Final Salary</h3>
+                    <div class="breakdown-item">
+                        <span>Gross Salary (Annual):</span>
+                        <span id="grossSalary">₹0</span>
+                    </div>
+                    <div class="breakdown-item total">
+                        <span>In-hand Salary (Annual):</span>
+                        <span id="inhandAnnual">₹0</span>
+                    </div>
+                    <div class="breakdown-item total monthly">
+                        <span>In-hand Salary (Monthly):</span>
+                        <span id="inhandMonthly">₹0</span>
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <h3>Tax Calculation Details</h3>
+                    <div id="taxBreakdown"></div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>
+                <i class="fas fa-info-circle"></i>
+                This calculator provides approximate values based on current Indian tax laws. 
+                Please consult a tax advisor for accurate calculations.
+            </p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

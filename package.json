@@ -1,0 +1,30 @@
+{
+  "name": "indian-salary-calculator",
+  "version": "1.0.0",
+  "description": "A comprehensive web-based salary calculator for Indian employees",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve -s .",
+    "build": "echo 'No build process needed for static site'",
+    "deploy": "surge --domain your-salary-calc.surge.sh"
+  },
+  "keywords": [
+    "salary",
+    "calculator",
+    "india",
+    "tax",
+    "ctc",
+    "inhand",
+    "finance"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "homepage": "https://github.com/yourusername/salary-calculator",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/salary-calculator.git"
+  },
+  "devDependencies": {
+    "serve": "^14.0.0"
+  }
+}
