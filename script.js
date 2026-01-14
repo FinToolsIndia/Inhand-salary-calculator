@@ -310,15 +310,63 @@ function showPremiumModal() {
     document.getElementById('newsletter-email').focus();
 }
 
-// Newsletter Subscription
+// Enhanced Newsletter Subscription
 function subscribeNewsletter(event) {
     event.preventDefault();
     const email = document.getElementById('newsletter-email').value;
+    const submitBtn = event.target.querySelector('.newsletter-btn');
+    const originalText = submitBtn.innerHTML;
     
-    // For now, just show success message
-    // In production, you'd send this to your email service
-    alert(`Thank you! ${email} has been subscribed to our newsletter. You'll receive weekly salary tips and updates.`);
-    document.getElementById('newsletter-email').value = '';
+    // Show loading state
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span class="btn-text">Subscribing...</span>';
+    submitBtn.disabled = true;
+    
+    // Simulate API call (replace with actual API call in production)
+    setTimeout(() => {
+        // Success state
+        submitBtn.innerHTML = '<i class="fas fa-check"></i> <span class="btn-text">Subscribed!</span>';
+        submitBtn.style.background = 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)';
+        
+        // Show success message with better UX
+        const successMessage = document.createElement('div');
+        successMessage.className = 'newsletter-success';
+        successMessage.innerHTML = `
+            <i class="fas fa-check-circle"></i>
+            <strong>Welcome aboard!</strong> ${email} has been subscribed to our newsletter.
+            <br><small>You'll receive weekly salary tips and career insights.</small>
+        `;
+        
+        // Insert success message after the form
+        const form = event.target;
+        form.insertAdjacentElement('afterend', successMessage);
+        
+        // Clear the email field
+        document.getElementById('newsletter-email').value = '';
+        
+        // Track engagement
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'newsletter_subscribe', {
+                'event_category': 'engagement',
+                'event_label': 'salary_calculator',
+                'value': 1
+            });
+        }
+        
+        // Reset button after 3 seconds
+        setTimeout(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            submitBtn.style.background = 'linear-gradient(135deg, #ffd700 0%, #ffed4a 100%)';
+            
+            // Remove success message after 5 seconds
+            setTimeout(() => {
+                if (successMessage.parentNode) {
+                    successMessage.remove();
+                }
+            }, 5000);
+        }, 3000);
+        
+    }, 1500); // Simulate network delay
 }
 
 // Enhanced user engagement tracking
