@@ -143,6 +143,41 @@ header p {
     transform: translateY(0);
 }
 
+.support-section {
+    margin-top: 20px;
+    text-align: center;
+    padding: 15px;
+    background: linear-gradient(135deg, #f7fafc, #edf2f7);
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+}
+
+.support-section p {
+    margin: 0 0 10px 0;
+    font-size: 0.9rem;
+    color: #4a5568;
+}
+
+.support-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #ff813f;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: background 0.2s ease;
+}
+
+.support-btn:hover {
+    background: #e6732d;
+    text-decoration: none;
+    color: white;
+}
+
 .result-card {
     background: #f7fafc;
     border-radius: 10px;
