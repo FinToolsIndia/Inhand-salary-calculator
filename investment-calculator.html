@@ -44,78 +44,162 @@
         </div>
 
         <main>
-            <div class="calculator-card">
+            <div class="calculator-card enhanced">
                 <h2>🚀 Investment Returns Calculator</h2>
                 <p class="description">
-                    Calculate the future value of your SIP investments, lump sum investments, and see the power of compound interest.
+                    Calculate the future value of your SIP investments, lump sum investments, and see the power of compound interest with our advanced calculator.
                 </p>
 
-                <div class="input-section">
-                    <div class="investment-tabs">
-                        <button class="tab-btn active" onclick="switchTab('sip')">SIP Investment</button>
-                        <button class="tab-btn" onclick="switchTab('lumpsum')">Lump Sum</button>
+                <div class="input-section enhanced">
+                    <div class="investment-tabs enhanced">
+                        <button class="tab-btn active" onclick="switchTab('sip')">
+                            <span class="tab-icon">📈</span>
+                            SIP Investment
+                            <span class="tab-subtitle">Monthly Systematic</span>
+                        </button>
+                        <button class="tab-btn" onclick="switchTab('lumpsum')">
+                            <span class="tab-icon">💰</span>
+                            Lump Sum
+                            <span class="tab-subtitle">One-time Investment</span>
+                        </button>
                     </div>
 
                     <!-- SIP Calculator -->
-                    <div id="sip-tab" class="tab-content active">
-                        <div class="form-group">
-                            <label>Monthly SIP Amount (₹)</label>
-                            <input type="number" id="sipAmount" value="5000" min="500" step="100">
+                    <div id="sip-tab" class="tab-content active enhanced">
+                        <div class="form-group enhanced">
+                            <label><span class="input-icon">💵</span>Monthly SIP Amount (₹)</label>
+                            <input type="number" id="sipAmount" value="5000" min="500" step="100" placeholder="Enter monthly SIP amount">
+                            <div class="input-help">Minimum: ₹500 | Recommended: ₹5,000+</div>
                         </div>
 
-                        <div class="form-group">
-                            <label>Investment Period (Years)</label>
-                            <input type="number" id="sipPeriod" value="10" min="1" max="50" step="1">
+                        <div class="form-group enhanced">
+                            <label><span class="input-icon">⏰</span>Investment Period (Years)</label>
+                            <input type="number" id="sipPeriod" value="10" min="1" max="50" step="1" placeholder="Investment duration">
+                            <div class="input-help">Longer periods = Better compounding</div>
                         </div>
 
-                        <div class="form-group">
-                            <label>Expected Annual Return (%)</label>
-                            <input type="number" id="sipReturn" value="12" min="1" max="30" step="0.5">
-                            <small>Historical market average: 10-15% for equity mutual funds</small>
+                        <div class="form-group enhanced">
+                            <label><span class="input-icon">📊</span>Expected Annual Return (%)</label>
+                            <input type="number" id="sipReturn" value="12" min="1" max="30" step="0.5" placeholder="Expected returns">
+                            <div class="input-help">Historical market average: 10-15% for equity mutual funds</div>
                         </div>
 
-                        <button class="calculate-btn" onclick="calculateSIP()">Calculate SIP Returns</button>
+                        <button class="calculate-btn enhanced" onclick="calculateSIP()">
+                            <span class="btn-icon">🧮</span>
+                            Calculate SIP Returns
+                        </button>
                     </div>
 
                     <!-- Lump Sum Calculator -->
-                    <div id="lumpsum-tab" class="tab-content">
-                        <div class="form-group">
-                            <label>Investment Amount (₹)</label>
-                            <input type="number" id="lumpAmount" value="100000" min="1000" step="1000">
+                    <div id="lumpsum-tab" class="tab-content enhanced">
+                        <div class="form-group enhanced">
+                            <label><span class="input-icon">💰</span>Investment Amount (₹)</label>
+                            <input type="number" id="lumpAmount" value="100000" min="1000" step="1000" placeholder="One-time investment amount">
+                            <div class="input-help">Minimum: ₹1,000 | Popular: ₹1,00,000+</div>
                         </div>
 
-                        <div class="form-group">
-                            <label>Investment Period (Years)</label>
-                            <input type="number" id="lumpPeriod" value="10" min="1" max="50" step="1">
+                        <div class="form-group enhanced">
+                            <label><span class="input-icon">⏰</span>Investment Period (Years)</label>
+                            <input type="number" id="lumpPeriod" value="10" min="1" max="50" step="1" placeholder="Investment duration">
+                            <div class="input-help">Time in market beats timing the market</div>
                         </div>
 
-                        <div class="form-group">
-                            <label>Expected Annual Return (%)</label>
-                            <input type="number" id="lumpReturn" value="12" min="1" max="30" step="0.5">
+                        <div class="form-group enhanced">
+                            <label><span class="input-icon">📈</span>Expected Annual Return (%)</label>
+                            <input type="number" id="lumpReturn" value="12" min="1" max="30" step="0.5" placeholder="Expected returns">
+                            <div class="input-help">Conservative: 8-10% | Aggressive: 12-15%</div>
                         </div>
 
-                        <button class="calculate-btn" onclick="calculateLumpSum()">Calculate Returns</button>
+                        <button class="calculate-btn enhanced" onclick="calculateLumpSum()">
+                            <span class="btn-icon">🧮</span>
+                            Calculate Returns
+                        </button>
                     </div>
                 </div>
 
                 <div id="investmentResults" class="results-section" style="display:none;">
-                    <h3>Investment Results</h3>
-                    <div class="result-grid">
-                        <div class="result-item highlight">
-                            <span class="result-label">Total Investment</span>
-                            <span class="result-value" id="totalInvestment">₹0</span>
+                    <h3>📊 Investment Analysis</h3>
+                    
+                    <!-- Key Metrics Cards -->
+                    <div class="metrics-cards">
+                        <div class="metric-card primary">
+                            <div class="metric-icon">💰</div>
+                            <div class="metric-content">
+                                <div class="metric-label">Total Investment</div>
+                                <div class="metric-value" id="totalInvestment">₹0</div>
+                                <div class="metric-subtitle">Your Total Contribution</div>
+                            </div>
                         </div>
-                        <div class="result-item highlight">
-                            <span class="result-label">Maturity Value</span>
-                            <span class="result-value" id="maturityValue">₹0</span>
+                        
+                        <div class="metric-card success">
+                            <div class="metric-icon">🎯</div>
+                            <div class="metric-content">
+                                <div class="metric-label">Maturity Value</div>
+                                <div class="metric-value" id="maturityValue">₹0</div>
+                                <div class="metric-subtitle">Final Corpus Amount</div>
+                            </div>
                         </div>
-                        <div class="result-item success">
-                            <span class="result-label">Total Returns</span>
-                            <span class="result-value" id="totalReturns">₹0</span>
+                        
+                        <div class="metric-card highlight">
+                            <div class="metric-icon">📈</div>
+                            <div class="metric-content">
+                                <div class="metric-label">Total Returns</div>
+                                <div class="metric-value" id="totalReturns">₹0</div>
+                                <div class="metric-subtitle">Wealth Generated</div>
+                            </div>
                         </div>
-                        <div class="result-item">
-                            <span class="result-label">Return on Investment</span>
-                            <span class="result-value" id="returnPercent">0%</span>
+                        
+                        <div class="metric-card info">
+                            <div class="metric-icon">⚡</div>
+                            <div class="metric-content">
+                                <div class="metric-label">ROI</div>
+                                <div class="metric-value" id="returnPercent">0%</div>
+                                <div class="metric-subtitle">Return on Investment</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Breakdown -->
+                    <div class="investment-breakdown">
+                        <h4>💡 Investment Breakdown</h4>
+                        <div class="breakdown-grid">
+                            <div class="breakdown-item">
+                                <span class="breakdown-label">Monthly Contribution</span>
+                                <span class="breakdown-value" id="monthlyAmount">₹0</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="breakdown-label">Investment Duration</span>
+                                <span class="breakdown-value" id="investmentYears">0 years</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="breakdown-label">Expected Annual Return</span>
+                                <span class="breakdown-value" id="annualReturn">0%</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="breakdown-label">Wealth Multiple</span>
+                                <span class="breakdown-value" id="wealthMultiple">0x</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Power of Compounding Visual -->
+                    <div class="compounding-visual">
+                        <h4>🚀 The Power of Compounding</h4>
+                        <div class="progress-container">
+                            <div class="progress-item">
+                                <div class="progress-label">Your Investment</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill investment-fill" id="investmentProgress" style="width: 40%"></div>
+                                </div>
+                                <div class="progress-amount" id="progressInvestment">₹0</div>
+                            </div>
+                            <div class="progress-item">
+                                <div class="progress-label">Returns Generated</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill returns-fill" id="returnsProgress" style="width: 60%"></div>
+                                </div>
+                                <div class="progress-amount" id="progressReturns">₹0</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -245,13 +329,58 @@
         }
 
         function displayResults(investment, maturity, returns, returnPercent) {
+            // Main metrics
             document.getElementById('totalInvestment').textContent = '₹' + investment.toLocaleString('en-IN');
             document.getElementById('maturityValue').textContent = '₹' + Math.round(maturity).toLocaleString('en-IN');
             document.getElementById('totalReturns').textContent = '₹' + Math.round(returns).toLocaleString('en-IN');
             document.getElementById('returnPercent').textContent = returnPercent + '%';
             
-            document.getElementById('investmentResults').style.display = 'block';
-            document.getElementById('investmentResults').scrollIntoView({ behavior: 'smooth' });
+            // Breakdown details
+            if (currentTab === 'sip') {
+                const monthlyAmount = parseFloat(document.getElementById('sipAmount').value);
+                const years = parseFloat(document.getElementById('sipPeriod').value);
+                const annualReturn = parseFloat(document.getElementById('sipReturn').value);
+                
+                document.getElementById('monthlyAmount').textContent = '₹' + monthlyAmount.toLocaleString('en-IN');
+                document.getElementById('investmentYears').textContent = years + ' years';
+                document.getElementById('annualReturn').textContent = annualReturn + '%';
+                document.getElementById('wealthMultiple').textContent = (maturity / investment).toFixed(1) + 'x';
+            } else {
+                const lumpAmount = parseFloat(document.getElementById('lumpAmount').value);
+                const years = parseFloat(document.getElementById('lumpPeriod').value);
+                const annualReturn = parseFloat(document.getElementById('lumpReturn').value);
+                
+                document.getElementById('monthlyAmount').textContent = '₹' + (lumpAmount / 12 / years).toFixed(0).toLocaleString('en-IN') + '/month equivalent';
+                document.getElementById('investmentYears').textContent = years + ' years';
+                document.getElementById('annualReturn').textContent = annualReturn + '%';
+                document.getElementById('wealthMultiple').textContent = (maturity / investment).toFixed(1) + 'x';
+            }
+            
+            // Progress visualization
+            const investmentPercentage = (investment / maturity) * 100;
+            const returnsPercentage = (returns / maturity) * 100;
+            
+            document.getElementById('investmentProgress').style.width = investmentPercentage + '%';
+            document.getElementById('returnsProgress').style.width = returnsPercentage + '%';
+            document.getElementById('progressInvestment').textContent = '₹' + investment.toLocaleString('en-IN');
+            document.getElementById('progressReturns').textContent = '₹' + Math.round(returns).toLocaleString('en-IN');
+            
+            // Show results with animation
+            const resultsSection = document.getElementById('investmentResults');
+            resultsSection.style.display = 'block';
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+            
+            // Animate metric cards
+            setTimeout(() => {
+                document.querySelectorAll('.metric-card').forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.transform = 'scale(1.05)';
+                        setTimeout(() => {
+                            card.style.transform = 'scale(1)';
+                        }, 200);
+                    }, index * 100);
+                });
+            }, 300);
         }
 
         // Initialize with SIP calculation
