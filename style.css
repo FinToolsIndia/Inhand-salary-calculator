@@ -44,6 +44,9 @@ body {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    min-height: 70px;
+    display: block !important;
+    visibility: visible !important;
 }
 
 .site-header.scrolled {
@@ -66,6 +69,7 @@ body {
     align-items: center;
     text-decoration: none;
     color: white;
+    color: #ffffff !important;
 }
 
 .site-logo h1 {
@@ -73,6 +77,8 @@ body {
     font-weight: 700;
     margin: 0;
     letter-spacing: -0.5px;
+    color: white;
+    color: #ffffff !important;
 }
 
 .site-logo .logo-subtext {
@@ -329,8 +335,15 @@ body {
 }
 
 /* Remove old header styles */
-header {
+header:not(.site-header) {
     display: none;
+}
+
+/* Ensure site header is always visible */
+header.site-header {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 /* Responsive Design for Header */
