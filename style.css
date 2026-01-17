@@ -1889,3 +1889,17 @@ footer i {
     color: #000000 !important;
     font-weight: 600;
 }
+
+/* Black color for salary labels - targeting parent breakdown items */
+.breakdown-item:nth-child(1) span:first-child, /* Gross Salary label */
+.breakdown-item:nth-child(2) span:first-child  /* In-hand Salary Annual label */
+{
+    color: #000000 !important;
+    font-weight: 500;
+}
+
+/* More specific targeting for the Final Salary section */
+.result-card.highlight .breakdown-item span:first-child {
+    color: #000000 !important;
+    font-weight: 500;
+}
