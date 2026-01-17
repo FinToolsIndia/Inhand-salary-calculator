@@ -42,28 +42,48 @@
      crossorigin="anonymous"></script>
 </head>
 <body>
+    <!-- Professional Site Header -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-content">
+            <a href="index.html" class="site-logo">
+                <h1>FinTools India</h1>
+                <span class="logo-subtext">Simple & Accurate Financial Calculators</span>
+            </a>
+            
+            <nav class="main-navigation">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link active">Salary Calculator</a></li>
+                    <li><a href="tax-planner.html" class="nav-link">Tax Tools</a></li>
+                    <li><a href="investment-calculator.html" class="nav-link">Investment Tools</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                </ul>
+                <a href="#premium" class="header-cta">Free Calculators</a>
+            </nav>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Mobile Navigation -->
+            <div class="mobile-nav" id="mobileNav">
+                <ul class="mobile-nav-links">
+                    <li><a href="index.html" class="nav-link active">Salary Calculator</a></li>
+                    <li><a href="tax-planner.html" class="nav-link">Tax Tools</a></li>
+                    <li><a href="investment-calculator.html" class="nav-link">Investment Tools</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#premium" class="header-cta">Free Calculators</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
     <div class="container">
-        <header>
-            <h1><i class="fas fa-calculator"></i> FinTools India</h1>
+        <!-- Page Header -->
+        <div class="page-header">
+            <h2><i class="fas fa-calculator"></i> Salary Calculator</h2>
             <p>Professional Indian Salary Calculator - Calculate your in-hand salary from CTC with accurate tax and deduction breakdowns for FY 2026-27</p>
             <div class="brand-subtitle">Trusted by thousands of professionals across India</div>
-            
-            <!-- Navigation Menu -->
-            <nav class="tool-navigation">
-                <a href="index.html" class="nav-link active">
-                    <i class="fas fa-money-bill-wave"></i> Salary Calculator
-                </a>
-                <a href="emi-calculator.html" class="nav-link">
-                    <i class="fas fa-home"></i> EMI Calculator
-                </a>
-                <a href="investment-calculator.html" class="nav-link">
-                    <i class="fas fa-chart-line"></i> Investment Calculator
-                </a>
-                <a href="tax-planner.html" class="nav-link">
-                    <i class="fas fa-calculator"></i> Tax Planner
-                </a>
-            </nav>
-        </header>
+        </div>
 
         <!-- AdSense Ad - Header Banner -->
         <div class="ad-container">
@@ -414,5 +434,43 @@
 
     <script src="script.js"></script>
     <script src="gdpr.js"></script>
+    
+    <!-- Header JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('open');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.className = mobileNav.classList.contains('open') ? 'fas fa-times' : 'fas fa-bars';
+        });
+        
+        // Header scroll effect
+        const siteHeader = document.getElementById('siteHeader');
+        let lastScrollTop = 0;
+        
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 10) {
+                siteHeader.classList.add('scrolled');
+            } else {
+                siteHeader.classList.remove('scrolled');
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.site-header')) {
+                mobileNav.classList.remove('open');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.className = 'fas fa-bars';
+            }
+        });
+    </script>
 </body>
 </html>

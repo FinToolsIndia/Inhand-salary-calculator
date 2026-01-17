@@ -7,31 +7,50 @@
     <link rel="stylesheet" href="style.css">
     <meta name="description" content="Plan your taxes for FY 2026-27 and maximize savings with our comprehensive Tax Planner. Calculate 80C deductions, tax liability, and optimize your financial planning.">
     <meta name="keywords" content="tax planner, 80C calculator, tax saving, income tax, India, tax deductions">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="header-content">
-                <h1 class="brand-title">💰 FinTools India</h1>
-                <p class="brand-subtitle">Your Financial Planning Partner</p>
-                
-                <!-- Tool Navigation -->
-                <div class="tool-navigation">
-                    <a href="index.html" class="nav-link">
-                        💼 Salary Calculator
-                    </a>
-                    <a href="emi-calculator.html" class="nav-link">
-                        🏠 EMI Calculator
-                    </a>
-                    <a href="investment-calculator.html" class="nav-link">
-                        📈 Investment Calculator
-                    </a>
-                    <a href="tax-planner.html" class="nav-link active">
-                        💳 Tax Planner
-                    </a>
+    <!-- Professional Site Header -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-content">
+            <a href="index.html" class="site-logo">
+                <h1>FinTools India</h1>
+                <span class="logo-subtext">Financial Planning Tools</span>
+            </a>
+            
+            <nav class="main-navigation">
+                <a href="index.html" class="nav-link">Salary Calculator</a>
+                <a href="emi-calculator.html" class="nav-link">EMI Calculator</a>
+                <a href="investment-calculator.html" class="nav-link">Investment Calculator</a>
+                <a href="tax-planner.html" class="nav-link active">Tax Planner</a>
+                <a href="contact.html" class="header-cta">Contact Us</a>
+            </nav>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav class="mobile-nav" id="mobileNav">
+                <div class="mobile-nav-links">
+                    <a href="index.html" class="nav-link">Salary Calculator</a>
+                    <a href="emi-calculator.html" class="nav-link">EMI Calculator</a>
+                    <a href="investment-calculator.html" class="nav-link">Investment Calculator</a>
+                    <a href="tax-planner.html" class="nav-link active">Tax Planner</a>
+                    <a href="contact.html" class="header-cta">Contact Us</a>
                 </div>
-            </div>
-        </header>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h2>Tax Planner & 80C Calculator</h2>
+            <p>Plan your taxes for FY 2026-27, calculate potential savings, and optimize your investments under Section 80C.</p>
+        </div>
 
         <!-- AdSense Top Banner -->
         <div class="ad-container">
@@ -45,9 +64,9 @@
 
         <main>
             <div class="calculator-card">
-                <h2>📊 Tax Planner & 80C Calculator (FY 2026-27)</h2>
+                <h3>Tax Calculation for FY 2026-27</h3>
                 <p class="description">
-                    Plan your taxes for FY 2026-27, calculate potential savings, and optimize your investments under Section 80C.
+                    Calculate your tax liability and plan your investments for maximum savings.
                 </p>
 
                 <div class="input-section">
@@ -399,6 +418,44 @@
         // Initialize with default calculation
         document.addEventListener('DOMContentLoaded', function() {
             calculateTax();
+        });
+    </script>
+
+    <!-- Header JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('open');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.className = mobileNav.classList.contains('open') ? 'fas fa-times' : 'fas fa-bars';
+        });
+        
+        // Header scroll effect
+        const siteHeader = document.getElementById('siteHeader');
+        let lastScrollTop = 0;
+        
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 10) {
+                siteHeader.classList.add('scrolled');
+            } else {
+                siteHeader.classList.remove('scrolled');
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.site-header')) {
+                mobileNav.classList.remove('open');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.className = 'fas fa-bars';
+            }
         });
     </script>
 
