@@ -60,7 +60,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 15px;
     height: 70px;
 }
 
@@ -70,6 +70,8 @@ body {
     text-decoration: none;
     color: white;
     color: #ffffff !important;
+    margin-right: auto;
+    min-width: 200px;
 }
 
 .site-logo h1 {
@@ -92,7 +94,9 @@ body {
 .main-navigation {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
+    margin-left: auto;
+    margin-right: 1rem;
 }
 
 .nav-links {
@@ -250,11 +254,13 @@ body {
 .tab-container {
     display: flex;
     background: var(--card-background);
-    border-radius: 12px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    padding: 6px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    padding: 8px;
     overflow-x: auto;
-    gap: 4px;
+    gap: 6px;
+    border: 1px solid var(--border-light);
+    position: relative;
 }
 
 .tab-item {
@@ -262,37 +268,45 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 12px 20px;
+    gap: 10px;
+    padding: 16px 24px;
     text-decoration: none;
     color: var(--text-secondary);
-    border-radius: 8px;
+    border-radius: 10px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     white-space: nowrap;
-    min-width: 140px;
+    min-width: 160px;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
 }
 
 .tab-item:hover {
-    background: var(--background-light);
+    background: linear-gradient(135deg, var(--background-light) 0%, #f1f5f9 100%);
     color: var(--primary-blue);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: var(--border-color);
 }
 
 .tab-item.active {
-    background: var(--primary-blue);
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
     color: white;
-    box-shadow: 0 2px 4px rgba(15, 42, 68, 0.2);
+    box-shadow: 0 4px 16px rgba(15, 42, 68, 0.3);
+    transform: translateY(-2px);
+    border-color: var(--secondary-teal);
 }
 
 .tab-item.active:hover {
-    background: var(--primary-blue-dark);
-    transform: translateY(-1px);
+    background: linear-gradient(135deg, var(--primary-blue-dark) 0%, #0A1E35 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(15, 42, 68, 0.4);
 }
 
 .tab-item i {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     flex-shrink: 0;
 }
 
@@ -331,6 +345,99 @@ body {
     .tab-item {
         min-width: 80px;
         padding: 8px;
+    }
+}
+
+/* Explanation Section */
+.explanation-section {
+    margin: 40px 0;
+    padding: 0 20px;
+}
+
+.explanation-card {
+    background: var(--card-background);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-light);
+}
+
+.explanation-card h3 {
+    color: var(--primary-blue);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.explanation-card h3 i {
+    color: var(--secondary-teal);
+    font-size: 1.2rem;
+}
+
+.explanation-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.explanation-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-radius: 12px;
+    border-left: 4px solid var(--secondary-teal);
+    transition: all 0.3s ease;
+}
+
+.explanation-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(43, 176, 166, 0.2);
+}
+
+.explanation-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.explanation-text h4 {
+    color: var(--primary-blue);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.explanation-text p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .explanation-card {
+        padding: 24px;
+    }
+    
+    .explanation-content {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .explanation-item {
+        padding: 16px;
     }
 }
 
