@@ -109,62 +109,282 @@
 
         <div class="calculator-section">
             <div class="input-panel">
-                <h3><i class="fas fa-calculator"></i> Loan Details</h3>
+                <h3><i class="fas fa-calculator"></i> Enhanced Loan Calculator</h3>
                 
-                <div class="form-group">
-                    <label for="loanAmount">Loan Amount (₹)</label>
-                    <input type="number" id="loanAmount" placeholder="Enter loan amount" min="1000">
+                <!-- Basic Loan Details -->
+                <div class="section-divider">
+                    <h4><i class="fas fa-info-circle"></i> Basic Loan Information</h4>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="loanAmount">Loan Amount (₹) <span class="required">*</span></label>
+                        <input type="number" id="loanAmount" placeholder="e.g., 2500000" min="1000" max="100000000">
+                        <small class="help-text">Enter the principal amount you want to borrow</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loanType">Loan Type <span class="required">*</span></label>
+                        <select id="loanType" onchange="updateInterestRange()">
+                            <option value="home">Home Loan (6.5% - 9.5%)</option>
+                            <option value="car">Car Loan (7.5% - 12%)</option>
+                            <option value="personal">Personal Loan (10% - 24%)</option>
+                            <option value="business">Business Loan (9% - 18%)</option>
+                            <option value="education">Education Loan (8% - 12%)</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="interestRate">Annual Interest Rate (%)</label>
-                    <input type="number" id="interestRate" placeholder="Enter interest rate" min="1" max="50" step="0.01">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="interestRate">Annual Interest Rate (%) <span class="required">*</span></label>
+                        <input type="number" id="interestRate" placeholder="8.50" min="1" max="50" step="0.01">
+                        <div class="interest-range">
+                            <span class="range-text">Typical range: <span id="rateRange">6.5% - 9.5%</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loanTenure">Loan Tenure (Years) <span class="required">*</span></label>
+                        <input type="number" id="loanTenure" placeholder="15" min="1" max="40">
+                        <small class="help-text">Maximum tenure varies by loan type</small>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="loanTenure">Loan Tenure (Years)</label>
-                    <input type="number" id="loanTenure" placeholder="Enter tenure in years" min="1" max="30">
+                <!-- Advanced Options -->
+                <div class="section-divider">
+                    <h4><i class="fas fa-cogs"></i> Advanced Options</h4>
                 </div>
 
-                <div class="form-group">
-                    <label for="loanType">Loan Type</label>
-                    <select id="loanType">
-                        <option value="home">Home Loan</option>
-                        <option value="car">Car Loan</option>
-                        <option value="personal">Personal Loan</option>
-                    </select>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="processingFee">Processing Fee (₹)</label>
+                        <input type="number" id="processingFee" placeholder="25000" min="0">
+                        <small class="help-text">One-time fee charged by the bank</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="downPayment">Down Payment (₹)</label>
+                        <input type="number" id="downPayment" placeholder="500000" min="0">
+                        <small class="help-text">Amount you pay upfront</small>
+                    </div>
                 </div>
 
-                <button onclick="calculateEMI()" class="calculate-btn">
-                    <i class="fas fa-calculator"></i> Calculate EMI
+                <!-- Income Information -->
+                <div class="section-divider">
+                    <h4><i class="fas fa-rupee-sign"></i> Income Information (Optional)</h4>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="monthlyIncome">Monthly Income (₹)</label>
+                        <input type="number" id="monthlyIncome" placeholder="75000" min="0">
+                        <small class="help-text">For affordability analysis</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="existingEMIs">Existing EMIs (₹)</label>
+                        <input type="number" id="existingEMIs" placeholder="15000" min="0">
+                        <small class="help-text">Current EMI commitments</small>
+                    </div>
+                </div>
+
+                <!-- Prepayment Options -->
+                <div class="section-divider">
+                    <h4><i class="fas fa-fast-forward"></i> Prepayment Analysis</h4>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="prepaymentType">Prepayment Type</label>
+                        <select id="prepaymentType">
+                            <option value="none">No Prepayment</option>
+                            <option value="monthly">Monthly Extra Payment</option>
+                            <option value="yearly">Yearly Lump Sum</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="prepaymentAmount">Extra Payment (₹)</label>
+                        <input type="number" id="prepaymentAmount" placeholder="5000" min="0">
+                        <small class="help-text">Additional amount towards principal</small>
+                    </div>
+                </div>
+
+                <button onclick="calculateAdvancedEMI()" class="calculate-btn enhanced">
+                    <i class="fas fa-chart-line"></i> Calculate Advanced EMI
                 </button>
             </div>
 
             <div class="results-panel">
-                <h2><i class="fas fa-chart-bar"></i> EMI Breakdown</h2>
+                <h2><i class="fas fa-chart-line"></i> Comprehensive EMI Analysis</h2>
                 
-                <div class="result-card highlight">
-                    <h3>Monthly EMI</h3>
-                    <div class="breakdown-item total monthly">
-                        <span>EMI Amount:</span>
-                        <span id="emiAmount">₹0</span>
+                <!-- EMI Summary Cards -->
+                <div class="results-grid">
+                    <div class="result-card highlight primary">
+                        <div class="card-header">
+                            <i class="fas fa-calendar-check"></i>
+                            <h3>Monthly EMI</h3>
+                        </div>
+                        <div class="card-value">
+                            <span id="emiAmount">₹0</span>
+                        </div>
+                        <div class="card-subtext">
+                            <span id="emiToIncomeRatio">--% of monthly income</span>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="card-header">
+                            <i class="fas fa-rupee-sign"></i>
+                            <h3>Total Interest</h3>
+                        </div>
+                        <div class="card-value">
+                            <span id="totalInterest">₹0</span>
+                        </div>
+                        <div class="card-subtext">
+                            <span id="interestPercentage">--% of loan amount</span>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="card-header">
+                            <i class="fas fa-calculator"></i>
+                            <h3>Total Payment</h3>
+                        </div>
+                        <div class="card-value">
+                            <span id="totalAmount">₹0</span>
+                        </div>
+                        <div class="card-subtext">
+                            <span id="totalCostBreakdown">Principal + Interest + Fees</span>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="card-header">
+                            <i class="fas fa-piggy-bank"></i>
+                            <h3>Prepayment Savings</h3>
+                        </div>
+                        <div class="card-value">
+                            <span id="prepaymentSavings">₹0</span>
+                        </div>
+                        <div class="card-subtext">
+                            <span id="tenureReduction">-- months saved</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="result-card">
-                    <h3>Loan Summary</h3>
-                    <div class="breakdown-item">
-                        <span>Principal Amount:</span>
-                        <span id="principalAmount">₹0</span>
+                <!-- Detailed Breakdown -->
+                <div class="detailed-breakdown">
+                    <div class="breakdown-section">
+                        <h4><i class="fas fa-list-alt"></i> Loan Details</h4>
+                        <div class="breakdown-grid">
+                            <div class="breakdown-item">
+                                <span>Principal Amount:</span>
+                                <span id="principalAmount">₹0</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span>Processing Fee:</span>
+                                <span id="displayProcessingFee">₹0</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span>Down Payment:</span>
+                                <span id="displayDownPayment">₹0</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span>Loan Tenure:</span>
+                                <span id="displayTenure">-- years</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span>Interest Rate:</span>
+                                <span id="displayInterestRate">--%</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span>First EMI Date:</span>
+                                <span id="firstEMIDate">--</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="breakdown-item">
-                        <span>Total Interest:</span>
-                        <span id="totalInterest">₹0</span>
+
+                    <!-- Affordability Analysis -->
+                    <div class="breakdown-section" id="affordabilitySection" style="display:none;">
+                        <h4><i class="fas fa-chart-pie"></i> Affordability Analysis</h4>
+                        <div class="affordability-meter">
+                            <div class="meter-container">
+                                <div class="meter-bar">
+                                    <div class="meter-fill" id="affordabilityMeter"></div>
+                                </div>
+                                <span class="meter-text" id="affordabilityText">Calculating...</span>
+                            </div>
+                            <div class="affordability-details">
+                                <div class="breakdown-item">
+                                    <span>Monthly Income:</span>
+                                    <span id="displayMonthlyIncome">₹0</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span>Existing EMIs:</span>
+                                    <span id="displayExistingEMIs">₹0</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span>Available for EMI:</span>
+                                    <span id="availableForEMI">₹0</span>
+                                </div>
+                                <div class="breakdown-item highlight">
+                                    <span>Loan Eligibility:</span>
+                                    <span id="loanEligibility">₹0</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="breakdown-item total">
-                        <span>Total Amount:</span>
-                        <span id="totalAmount">₹0</span>
+                </div>
+
+                <!-- Amortization Preview -->
+                <div class="amortization-section">
+                    <h4><i class="fas fa-table"></i> Payment Schedule Preview</h4>
+                    <div class="amortization-preview">
+                        <div class="schedule-tabs">
+                            <button class="schedule-tab active" onclick="showScheduleView('yearly')">Yearly View</button>
+                            <button class="schedule-tab" onclick="showScheduleView('monthly')">Monthly View</button>
+                        </div>
+                        <div class="schedule-container">
+                            <div id="yearlySchedule" class="schedule-content active">
+                                <div class="schedule-header">
+                                    <span>Year</span>
+                                    <span>Principal</span>
+                                    <span>Interest</span>
+                                    <span>Balance</span>
+                                </div>
+                                <div id="yearlyScheduleBody" class="schedule-body">
+                                    <!-- Yearly schedule will be populated here -->
+                                </div>
+                            </div>
+                            <div id="monthlySchedule" class="schedule-content">
+                                <div class="schedule-header">
+                                    <span>Month</span>
+                                    <span>EMI</span>
+                                    <span>Principal</span>
+                                    <span>Interest</span>
+                                    <span>Balance</span>
+                                </div>
+                                <div id="monthlyScheduleBody" class="schedule-body">
+                                    <!-- Monthly schedule will be populated here -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button onclick="downloadEMISchedule()" class="action-btn secondary">
+                        <i class="fas fa-download"></i> Download Schedule
+                    </button>
+                    <button onclick="showComparison()" class="action-btn primary">
+                        <i class="fas fa-balance-scale"></i> Compare Loans
+                    </button>
+                    <button onclick="emailResults()" class="action-btn secondary">
+                        <i class="fas fa-envelope"></i> Email Results
+                    </button>
                 </div>
             </div>
         </div>
@@ -191,29 +411,308 @@
     </div>
 
     <script>
-        function calculateEMI() {
-            const loanAmount = parseFloat(document.getElementById('loanAmount').value);
-            const annualRate = parseFloat(document.getElementById('interestRate').value);
-            const tenure = parseFloat(document.getElementById('loanTenure').value);
+        // Enhanced EMI Calculator with Advanced Features
+        
+        function updateInterestRange() {
+            const loanType = document.getElementById('loanType').value;
+            const rateRange = document.getElementById('rateRange');
+            const interestInput = document.getElementById('interestRate');
+            
+            const ranges = {
+                'home': { range: '6.5% - 9.5%', suggested: 8.5 },
+                'car': { range: '7.5% - 12%', suggested: 9.5 },
+                'personal': { range: '10% - 24%', suggested: 15.0 },
+                'business': { range: '9% - 18%', suggested: 12.0 },
+                'education': { range: '8% - 12%', suggested: 10.0 }
+            };
+            
+            const typeData = ranges[loanType];
+            rateRange.textContent = typeData.range;
+            interestInput.placeholder = typeData.suggested.toString();
+        }
 
-            if (!loanAmount || !annualRate || !tenure) {
-                alert('Please fill all fields');
+        function calculateAdvancedEMI() {
+            // Get all input values
+            const loanAmount = parseFloat(document.getElementById('loanAmount').value);
+            const interestRate = parseFloat(document.getElementById('interestRate').value);
+            const tenure = parseFloat(document.getElementById('loanTenure').value);
+            const processingFee = parseFloat(document.getElementById('processingFee').value) || 0;
+            const downPayment = parseFloat(document.getElementById('downPayment').value) || 0;
+            const monthlyIncome = parseFloat(document.getElementById('monthlyIncome').value) || 0;
+            const existingEMIs = parseFloat(document.getElementById('existingEMIs').value) || 0;
+            const prepaymentType = document.getElementById('prepaymentType').value;
+            const prepaymentAmount = parseFloat(document.getElementById('prepaymentAmount').value) || 0;
+
+            // Validation
+            if (!loanAmount || !interestRate || !tenure) {
+                alert('Please fill in the required fields: Loan Amount, Interest Rate, and Tenure');
                 return;
             }
 
-            const monthlyRate = annualRate / 12 / 100;
-            const months = tenure * 12;
+            // Calculate basic EMI
+            const actualLoanAmount = loanAmount - downPayment;
+            const monthlyRate = interestRate / 12 / 100;
+            const totalMonths = tenure * 12;
 
-            const emi = (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, months)) / 
-                       (Math.pow(1 + monthlyRate, months) - 1);
+            const emi = (actualLoanAmount * monthlyRate * Math.pow(1 + monthlyRate, totalMonths)) / 
+                       (Math.pow(1 + monthlyRate, totalMonths) - 1);
 
-            const totalAmount = emi * months;
-            const totalInterest = totalAmount - loanAmount;
+            const totalPayment = emi * totalMonths;
+            const totalInterest = totalPayment - actualLoanAmount;
+            const totalCost = totalPayment + processingFee + downPayment;
 
+            // Calculate prepayment savings
+            let prepaymentSavings = 0;
+            let reducedTenure = totalMonths;
+            
+            if (prepaymentType !== 'none' && prepaymentAmount > 0) {
+                const savings = calculatePrepaymentSavings(actualLoanAmount, monthlyRate, totalMonths, prepaymentAmount, prepaymentType);
+                prepaymentSavings = savings.interestSaved;
+                reducedTenure = savings.newTenure;
+            }
+
+            // Update all displays
+            updateBasicResults(emi, actualLoanAmount, totalInterest, totalCost, prepaymentSavings, reducedTenure);
+            updateLoanDetails(actualLoanAmount, processingFee, downPayment, tenure, interestRate);
+            
+            if (monthlyIncome > 0) {
+                updateAffordabilityAnalysis(emi, monthlyIncome, existingEMIs, interestRate);
+            }
+            
+            generateAmortizationSchedule(actualLoanAmount, monthlyRate, totalMonths, emi);
+        }
+
+        function updateBasicResults(emi, principal, totalInterest, totalCost, savings, reducedTenure) {
             document.getElementById('emiAmount').textContent = formatCurrency(emi);
-            document.getElementById('principalAmount').textContent = formatCurrency(loanAmount);
             document.getElementById('totalInterest').textContent = formatCurrency(totalInterest);
-            document.getElementById('totalAmount').textContent = formatCurrency(totalAmount);
+            document.getElementById('totalAmount').textContent = formatCurrency(totalCost);
+            document.getElementById('prepaymentSavings').textContent = formatCurrency(savings);
+            
+            const monthsSaved = parseFloat(document.getElementById('loanTenure').value) * 12 - reducedTenure;
+            document.getElementById('tenureReduction').textContent = `${Math.round(monthsSaved)} months saved`;
+            
+            const interestPercentage = ((totalInterest / principal) * 100).toFixed(1);
+            document.getElementById('interestPercentage').textContent = `${interestPercentage}% of loan amount`;
+            
+            const monthlyIncome = parseFloat(document.getElementById('monthlyIncome').value) || 0;
+            if (monthlyIncome > 0) {
+                const ratio = ((emi / monthlyIncome) * 100).toFixed(1);
+                document.getElementById('emiToIncomeRatio').textContent = `${ratio}% of monthly income`;
+            }
+        }
+
+        function updateLoanDetails(principal, fee, downPayment, tenure, rate) {
+            document.getElementById('principalAmount').textContent = formatCurrency(principal);
+            document.getElementById('displayProcessingFee').textContent = formatCurrency(fee);
+            document.getElementById('displayDownPayment').textContent = formatCurrency(downPayment);
+            document.getElementById('displayTenure').textContent = `${tenure} years`;
+            document.getElementById('displayInterestRate').textContent = `${rate}%`;
+            
+            // Calculate first EMI date (next month)
+            const today = new Date();
+            const firstEMI = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+            document.getElementById('firstEMIDate').textContent = firstEMI.toLocaleDateString('en-IN');
+        }
+
+        function updateAffordabilityAnalysis(emi, monthlyIncome, existingEMIs, interestRate) {
+            const section = document.getElementById('affordabilitySection');
+            section.style.display = 'block';
+            
+            document.getElementById('displayMonthlyIncome').textContent = formatCurrency(monthlyIncome);
+            document.getElementById('displayExistingEMIs').textContent = formatCurrency(existingEMIs);
+            
+            const totalEMIs = emi + existingEMIs;
+            const emiRatio = (totalEMIs / monthlyIncome) * 100;
+            const availableForEMI = monthlyIncome * 0.5; // 50% of income is safe for EMIs
+            
+            document.getElementById('availableForEMI').textContent = formatCurrency(availableForEMI);
+            
+            // Calculate loan eligibility (max loan for 50% EMI ratio)
+            const maxEMI = availableForEMI - existingEMIs;
+            const monthlyRate = interestRate / 12 / 100;
+            const tenure = parseFloat(document.getElementById('loanTenure').value) * 12;
+            const eligibleLoan = (maxEMI * (Math.pow(1 + monthlyRate, tenure) - 1)) / 
+                               (monthlyRate * Math.pow(1 + monthlyRate, tenure));
+            
+            document.getElementById('loanEligibility').textContent = formatCurrency(Math.max(0, eligibleLoan));
+            
+            // Update affordability meter
+            updateAffordabilityMeter(emiRatio);
+        }
+
+        function updateAffordabilityMeter(emiRatio) {
+            const meter = document.getElementById('affordabilityMeter');
+            const text = document.getElementById('affordabilityText');
+            
+            let status, width, className;
+            
+            if (emiRatio <= 30) {
+                status = 'Excellent - Very Affordable';
+                width = Math.min(emiRatio * 3.33, 100);
+                className = 'excellent';
+            } else if (emiRatio <= 40) {
+                status = 'Good - Affordable';
+                width = Math.min(emiRatio * 2.5, 100);
+                className = 'good';
+            } else if (emiRatio <= 50) {
+                status = 'Fair - Manageable';
+                width = Math.min(emiRatio * 2, 100);
+                className = 'fair';
+            } else {
+                status = 'Poor - High Risk';
+                width = 100;
+                className = 'poor';
+            }
+            
+            meter.style.width = width + '%';
+            meter.className = `meter-fill ${className}`;
+            text.textContent = `${emiRatio.toFixed(1)}% - ${status}`;
+        }
+
+        function calculatePrepaymentSavings(principal, monthlyRate, totalMonths, prepaymentAmount, prepaymentType) {
+            // Simplified prepayment calculation
+            let remainingPrincipal = principal;
+            let totalInterestPaid = 0;
+            let month = 1;
+            
+            const regularEMI = (principal * monthlyRate * Math.pow(1 + monthlyRate, totalMonths)) / 
+                              (Math.pow(1 + monthlyRate, totalMonths) - 1);
+            
+            while (remainingPrincipal > 1 && month <= totalMonths) {
+                const interestPayment = remainingPrincipal * monthlyRate;
+                const principalPayment = regularEMI - interestPayment;
+                
+                totalInterestPaid += interestPayment;
+                remainingPrincipal -= principalPayment;
+                
+                // Add prepayment
+                if (prepaymentType === 'monthly' || (prepaymentType === 'yearly' && month % 12 === 0)) {
+                    remainingPrincipal = Math.max(0, remainingPrincipal - prepaymentAmount);
+                }
+                
+                month++;
+            }
+            
+            const originalInterest = (regularEMI * totalMonths) - principal;
+            const interestSaved = originalInterest - totalInterestPaid;
+            
+            return {
+                interestSaved: Math.max(0, interestSaved),
+                newTenure: month - 1
+            };
+        }
+
+        function generateAmortizationSchedule(principal, monthlyRate, totalMonths, emi) {
+            const yearlyScheduleBody = document.getElementById('yearlyScheduleBody');
+            const monthlyScheduleBody = document.getElementById('monthlyScheduleBody');
+            
+            yearlyScheduleBody.innerHTML = '';
+            monthlyScheduleBody.innerHTML = '';
+            
+            let remainingPrincipal = principal;
+            let yearlyPrincipal = 0;
+            let yearlyInterest = 0;
+            
+            for (let month = 1; month <= Math.min(totalMonths, 240); month++) { // Limit to 20 years for performance
+                const interestPayment = remainingPrincipal * monthlyRate;
+                const principalPayment = Math.min(emi - interestPayment, remainingPrincipal);
+                remainingPrincipal -= principalPayment;
+                
+                yearlyPrincipal += principalPayment;
+                yearlyInterest += interestPayment;
+                
+                // Add monthly row (show first 12 months only)
+                if (month <= 12) {
+                    const monthRow = document.createElement('div');
+                    monthRow.className = 'schedule-row monthly';
+                    monthRow.innerHTML = `
+                        <span>${month}</span>
+                        <span>${formatCurrency(emi)}</span>
+                        <span>${formatCurrency(principalPayment)}</span>
+                        <span>${formatCurrency(interestPayment)}</span>
+                        <span>${formatCurrency(remainingPrincipal)}</span>
+                    `;
+                    monthlyScheduleBody.appendChild(monthRow);
+                }
+                
+                // Add yearly summary
+                if (month % 12 === 0 || remainingPrincipal <= 0) {
+                    const year = Math.ceil(month / 12);
+                    const yearRow = document.createElement('div');
+                    yearRow.className = 'schedule-row';
+                    yearRow.innerHTML = `
+                        <span>Year ${year}</span>
+                        <span>${formatCurrency(yearlyPrincipal)}</span>
+                        <span>${formatCurrency(yearlyInterest)}</span>
+                        <span>${formatCurrency(remainingPrincipal)}</span>
+                    `;
+                    yearlyScheduleBody.appendChild(yearRow);
+                    
+                    yearlyPrincipal = 0;
+                    yearlyInterest = 0;
+                }
+                
+                if (remainingPrincipal <= 0) break;
+            }
+        }
+
+        function showScheduleView(viewType) {
+            // Update tab active state
+            document.querySelectorAll('.schedule-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Show/hide schedule content
+            document.querySelectorAll('.schedule-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(viewType + 'Schedule').classList.add('active');
+            
+            // Update header for monthly view
+            const header = document.querySelector(`#${viewType}Schedule .schedule-header`);
+            if (viewType === 'monthly') {
+                header.classList.add('monthly');
+            } else {
+                header.classList.remove('monthly');
+            }
+        }
+
+        function downloadEMISchedule() {
+            // Create downloadable content
+            const loanAmount = document.getElementById('loanAmount').value;
+            const interestRate = document.getElementById('interestRate').value;
+            const tenure = document.getElementById('loanTenure').value;
+            const emi = document.getElementById('emiAmount').textContent;
+            
+            const content = `EMI Calculator Results\n\n` +
+                          `Loan Amount: ₹${loanAmount}\n` +
+                          `Interest Rate: ${interestRate}%\n` +
+                          `Tenure: ${tenure} years\n` +
+                          `Monthly EMI: ${emi}\n\n` +
+                          `Generated by FinToolsIndia.com\n` +
+                          `Date: ${new Date().toLocaleDateString('en-IN')}`;
+            
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'EMI-Schedule-FinToolsIndia.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function showComparison() {
+            alert('Loan comparison feature coming soon! This will allow you to compare multiple loan options side by side.');
+        }
+
+        function emailResults() {
+            const emi = document.getElementById('emiAmount').textContent;
+            const total = document.getElementById('totalAmount').textContent;
+            
+            const subject = 'My EMI Calculation Results - FinToolsIndia';
+            const body = `Here are my EMI calculation results:\n\n` +
+                        `Monthly EMI: ${emi}\n` +
+                        `Total Payment: ${total}\n\n` +
+                        `Calculated using FinToolsIndia.com`;
+            
+            window.open(`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
         }
 
         function formatCurrency(amount) {
@@ -223,6 +722,11 @@
                 maximumFractionDigits: 0
             }).format(amount);
         }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateInterestRange();
+        });
     </script>
 
     <!-- Header JavaScript -->
