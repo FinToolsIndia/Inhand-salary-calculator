@@ -7,31 +7,72 @@
     <link rel="stylesheet" href="style.css">
     <meta name="description" content="Calculate SIP, lump sum investments, and compound interest returns with our free Investment Returns Calculator for 2026. Plan your financial future with accurate projections.">
     <meta name="keywords" content="investment calculator, SIP calculator, compound interest, mutual funds, India">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="header-content">
-                <h1 class="brand-title">💰 FinTools India</h1>
-                <p class="brand-subtitle">Your Financial Planning Partner</p>
-                
-                <!-- Tool Navigation -->
-                <div class="tool-navigation">
-                    <a href="index.html" class="nav-link">
-                        💼 Salary Calculator
-                    </a>
-                    <a href="emi-calculator.html" class="nav-link">
-                        🏠 EMI Calculator
-                    </a>
-                    <a href="investment-calculator.html" class="nav-link active">
-                        📈 Investment Calculator
-                    </a>
-                    <div class="nav-link coming-soon">
-                        💳 Tax Planner <span class="coming-soon-badge">Soon</span>
-                    </div>
+    <!-- Professional Site Header -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-content">
+            <a href="index.html" class="site-logo">
+                <h1>FinTools India</h1>
+                <span class="logo-subtext">Financial Planning Tools</span>
+            </a>
+            
+            <nav class="main-navigation">
+                <a href="index.html" class="nav-link">Salary Calculator</a>
+                <a href="emi-calculator.html" class="nav-link">EMI Calculator</a>
+                <a href="investment-calculator.html" class="nav-link active">Investment Calculator</a>
+                <a href="tax-planner.html" class="nav-link">Tax Planner</a>
+                <a href="contact.html" class="header-cta">Contact Us</a>
+            </nav>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav class="mobile-nav" id="mobileNav">
+                <div class="mobile-nav-links">
+                    <a href="index.html" class="nav-link">Salary Calculator</a>
+                    <a href="emi-calculator.html" class="nav-link">EMI Calculator</a>
+                    <a href="investment-calculator.html" class="nav-link active">Investment Calculator</a>
+                    <a href="tax-planner.html" class="nav-link">Tax Planner</a>
+                    <a href="contact.html" class="header-cta">Contact Us</a>
                 </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h2>Investment Returns Calculator</h2>
+            <p>Calculate the future value of your SIP investments, lump sum investments, and see the power of compound interest.</p>
+        </div>
+
+        <!-- Calculator Tabs Navigation -->
+        <div class="calculator-tabs">
+            <div class="tab-container">
+                <a href="index.html" class="tab-item">
+                    <i class="fas fa-calculator"></i>
+                    <span>Salary Calculator</span>
+                </a>
+                <a href="tax-planner.html" class="tab-item">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <span>Tax Planner</span>
+                </a>
+                <a href="emi-calculator.html" class="tab-item">
+                    <i class="fas fa-home"></i>
+                    <span>EMI Calculator</span>
+                </a>
+                <a href="investment-calculator.html" class="tab-item active">
+                    <i class="fas fa-chart-line"></i>
+                    <span>SIP Calculator</span>
+                </a>
             </div>
-        </header>
+        </div>
 
         <!-- AdSense Top Banner -->
         <div class="ad-container">
@@ -45,9 +86,9 @@
 
         <main>
             <div class="calculator-card enhanced">
-                <h2>🚀 Investment Returns Calculator</h2>
+                <h3>Investment Returns Calculator</h3>
                 <p class="description">
-                    Calculate the future value of your SIP investments, lump sum investments, and see the power of compound interest with our advanced calculator.
+                    Calculate the future value of your SIP investments, lump sum investments, and see the power of compound interest.
                 </p>
 
                 <div class="input-section enhanced">
@@ -386,6 +427,44 @@
         // Initialize with SIP calculation
         document.addEventListener('DOMContentLoaded', function() {
             calculateSIP();
+        });
+    </script>
+
+    <!-- Header JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('open');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.className = mobileNav.classList.contains('open') ? 'fas fa-times' : 'fas fa-bars';
+        });
+        
+        // Header scroll effect
+        const siteHeader = document.getElementById('siteHeader');
+        let lastScrollTop = 0;
+        
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 10) {
+                siteHeader.classList.add('scrolled');
+            } else {
+                siteHeader.classList.remove('scrolled');
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.site-header')) {
+                mobileNav.classList.remove('open');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.className = 'fas fa-bars';
+            }
         });
     </script>
 
