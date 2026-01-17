@@ -232,6 +232,16 @@
                         <div class="card-subtext">
                             <span id="emiToIncomeRatio">--% of monthly income</span>
                         </div>
+                        <div class="emi-breakdown" id="emiBreakdown" style="display:none;">
+                            <div class="breakdown-item mini">
+                                <span>Principal:</span>
+                                <span id="currentPrincipalAmount">₹0</span>
+                            </div>
+                            <div class="breakdown-item mini">
+                                <span>Interest:</span>
+                                <span id="currentInterestAmount">₹0</span>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="result-card">
@@ -303,6 +313,14 @@
                                 <span>First EMI Date:</span>
                                 <span id="firstEMIDate">--</span>
                             </div>
+                            <div class="breakdown-item highlight">
+                                <span>First Month Split:</span>
+                                <span id="firstMonthSplit">Principal: ₹0 | Interest: ₹0</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span>Interest Reduces Over Time:</span>
+                                <span style="color: #28a745; font-size: 0.85em;">More principal, less interest each month</span>
+                            </div>
                         </div>
                     </div>
 
@@ -350,8 +368,8 @@
                             <div id="yearlySchedule" class="schedule-content active">
                                 <div class="schedule-header">
                                     <span>Year</span>
-                                    <span>Principal</span>
-                                    <span>Interest</span>
+                                    <span>Principal (% of Year)</span>
+                                    <span>Interest (% of Year)</span>
                                     <span>Balance</span>
                                 </div>
                                 <div id="yearlyScheduleBody" class="schedule-body">
@@ -362,8 +380,8 @@
                                 <div class="schedule-header">
                                     <span>Month</span>
                                     <span>EMI</span>
-                                    <span>Principal</span>
-                                    <span>Interest</span>
+                                    <span>Principal (% of EMI)</span>
+                                    <span>Interest (% of EMI)</span>
                                     <span>Balance</span>
                                 </div>
                                 <div id="monthlyScheduleBody" class="schedule-body">
@@ -499,6 +517,17 @@
                 const ratio = ((emi / monthlyIncome) * 100).toFixed(1);
                 document.getElementById('emiToIncomeRatio').textContent = `${ratio}% of monthly income`;
             }
+            
+            // Calculate first month's principal and interest breakdown
+            const interestRate = parseFloat(document.getElementById('interestRate').value);
+            const monthlyRate = interestRate / 12 / 100;
+            const firstMonthInterest = principal * monthlyRate;
+            const firstMonthPrincipal = emi - firstMonthInterest;
+            
+            // Show EMI breakdown
+            document.getElementById('currentPrincipalAmount').textContent = formatCurrency(firstMonthPrincipal);
+            document.getElementById('currentInterestAmount').textContent = formatCurrency(firstMonthInterest);
+            document.getElementById('emiBreakdown').style.display = 'block';
         }
 
         function updateLoanDetails(principal, fee, downPayment, tenure, rate) {
@@ -512,6 +541,18 @@
             const today = new Date();
             const firstEMI = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
             document.getElementById('firstEMIDate').textContent = firstEMI.toLocaleDateString('en-IN');
+            
+            // Calculate first month breakdown
+            const monthlyRate = rate / 12 / 100;
+            const totalMonths = tenure * 12;
+            const emi = (principal * monthlyRate * Math.pow(1 + monthlyRate, totalMonths)) / 
+                       (Math.pow(1 + monthlyRate, totalMonths) - 1);
+            
+            const firstMonthInterest = principal * monthlyRate;
+            const firstMonthPrincipal = emi - firstMonthInterest;
+            
+            document.getElementById('firstMonthSplit').textContent = 
+                `Principal: ${formatCurrency(firstMonthPrincipal)} | Interest: ${formatCurrency(firstMonthInterest)}`;
         }
 
         function updateAffordabilityAnalysis(emi, monthlyIncome, existingEMIs, interestRate) {
@@ -612,24 +653,36 @@
             let remainingPrincipal = principal;
             let yearlyPrincipal = 0;
             let yearlyInterest = 0;
+            let cumulativeInterest = 0;
+            let cumulativePrincipal = 0;
+            
+            // Show more months initially (24 months = 2 years)
+            const monthsToShow = Math.min(24, totalMonths);
             
             for (let month = 1; month <= Math.min(totalMonths, 240); month++) { // Limit to 20 years for performance
                 const interestPayment = remainingPrincipal * monthlyRate;
                 const principalPayment = Math.min(emi - interestPayment, remainingPrincipal);
                 remainingPrincipal -= principalPayment;
                 
+                cumulativeInterest += interestPayment;
+                cumulativePrincipal += principalPayment;
+                
                 yearlyPrincipal += principalPayment;
                 yearlyInterest += interestPayment;
                 
-                // Add monthly row (show first 12 months only)
-                if (month <= 12) {
+                // Add monthly row (show first 24 months)
+                if (month <= monthsToShow) {
                     const monthRow = document.createElement('div');
                     monthRow.className = 'schedule-row monthly';
+                    
+                    const principalPercentage = ((principalPayment / emi) * 100).toFixed(1);
+                    const interestPercentage = ((interestPayment / emi) * 100).toFixed(1);
+                    
                     monthRow.innerHTML = `
-                        <span>${month}</span>
+                        <span>Month ${month}</span>
                         <span>${formatCurrency(emi)}</span>
-                        <span>${formatCurrency(principalPayment)}</span>
-                        <span>${formatCurrency(interestPayment)}</span>
+                        <span>${formatCurrency(principalPayment)} <small>(${principalPercentage}%)</small></span>
+                        <span>${formatCurrency(interestPayment)} <small>(${interestPercentage}%)</small></span>
                         <span>${formatCurrency(remainingPrincipal)}</span>
                     `;
                     monthlyScheduleBody.appendChild(monthRow);
@@ -640,10 +693,15 @@
                     const year = Math.ceil(month / 12);
                     const yearRow = document.createElement('div');
                     yearRow.className = 'schedule-row';
+                    
+                    const yearlyTotal = yearlyPrincipal + yearlyInterest;
+                    const yearPrincipalPercent = yearlyTotal > 0 ? ((yearlyPrincipal / yearlyTotal) * 100).toFixed(1) : 0;
+                    const yearInterestPercent = yearlyTotal > 0 ? ((yearlyInterest / yearlyTotal) * 100).toFixed(1) : 0;
+                    
                     yearRow.innerHTML = `
                         <span>Year ${year}</span>
-                        <span>${formatCurrency(yearlyPrincipal)}</span>
-                        <span>${formatCurrency(yearlyInterest)}</span>
+                        <span>${formatCurrency(yearlyPrincipal)} <small>(${yearPrincipalPercent}%)</small></span>
+                        <span>${formatCurrency(yearlyInterest)} <small>(${yearInterestPercent}%)</small></span>
                         <span>${formatCurrency(remainingPrincipal)}</span>
                     `;
                     yearlyScheduleBody.appendChild(yearRow);
@@ -653,6 +711,18 @@
                 }
                 
                 if (remainingPrincipal <= 0) break;
+            }
+            
+            // Add summary information
+            if (monthsToShow < totalMonths) {
+                const summaryRow = document.createElement('div');
+                summaryRow.className = 'schedule-row summary';
+                summaryRow.innerHTML = `
+                    <span style="grid-column: 1 / -1; text-align: center; font-style: italic; color: #666;">
+                        Showing first ${monthsToShow} months. Total loan tenure: ${Math.ceil(totalMonths/12)} years (${totalMonths} months)
+                    </span>
+                `;
+                monthlyScheduleBody.appendChild(summaryRow);
             }
         }
 
